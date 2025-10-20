@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+<head>
+	<!-- Basic metas
+    ======================================== -->
+	<meta charset="utf-8">
+	<meta name="author" content="">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+
+	<!-- Mobile specific metas
+    ======================================== -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">	
+	<meta property="og:title" content="Documentation" />	
+	<meta property="og:url" content="index.html" />		
+	<!-- Page Title
+    ======================================== -->
+	<title>Agntix - Digital Agency & Creative Portfolio NextJs Template</title>
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+	<!-- fonts
+	======================================== -->	
+	<link rel="stylesheet" type="text/css" href="assets/css/elegantFont.css">
+	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="assets/css/vendor/bootstrap.min.css">
+	<!-- Custom css -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+</head>
+
+<body>
+	<!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+	<![endif]-->
+	<!-- Header starts -->	
+	<a href="#top" class="back-to-top"><i class="fal fa-arrow-up"></i></a>
+
+	<header class="page-header sticky-top" id="top">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-3 col-md-4 col-sm-6 col-6">
+					<div class="logo">
+						<a href="index.html" class="nav-brand">
+							<img src="assets/images/logo.png" alt="logo" width="155" height="36">
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-9 col-md-8 col-sm-6 col-6">
+					<div class="right-part d-flex justify-content-end align-items-center">
+						<form action="#" class="search-form d-none d-lg-block">
+							<div class="input-group">
+								<input type="text" class="search-input" placeholder="Search item">
+							</div>
+						</form>
+						<div class="nav-list">
+							<a class="support-link d-none d-md-inline-block" href="https://help.aqlova.com/" target="_blank">request support</a>
+							<a class="e-btn d-none d-md-inline-block" href="https://themeforest.net/user/aqlova/portfolio" target="_blank">Visit Themes</a>
+							<a href="#" class="toggle-navbar"><i class="icon_menu"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End of .container -->
+	</header>
+	<div class="main-content-wrapper">
+		<div class="container ">
+			<div class="row doc-container">
+				<div class="col-xl-3">
+					<aside class="sidebar-navigation sticky-top doc-sidebar">
+						<h3>Doc Navigation</h3>
+						<!-- <nav class="nav">						 -->
+							<ul class="themepure-doc-nav  nav-sidebar doc-nav">
+								<li class="nav-item">
+									<a class="nav-link" href="#getting_started"><img src="assets/images/icon/start-button.png"> Getting Started </a>
+									<span class="icon">
+										<i class="icon_plus"></i>
+										<i class="icon_minus-06"></i>
+									</span>
+									<ul class="submenu dropdown_nav">
+										<li class="nav-item"><a class="nav-link" href="#introduction">Introduction</a></li>
+										<li class="nav-item"><a class="nav-link" href="#requirements">Peekage Requirements</a></li>
+										<li class="nav-item"><a class="nav-link" href="#what_included">What's Included</a></li>
+									</ul>
+								</li>
+
+								<li class="nav-item">
+									<a class="nav-link" href="#react_installation"><img src="assets/images/icon/react-icon.png"> React Installation</a>
+								</li>
+	
+								<li class="nav-item">
+									<a class="nav-link" href="#template"><img src="assets/images/icon/hierarchical-structure.png"> Template Site Settings</a>
+									<span class="icon">
+										<i class="icon_plus"></i>
+										<i class="icon_minus-06"></i>
+									</span>
+								<ul class="submenu dropdown_nav">
+									<li class="sub-nav nav-item ">
+										<a class="nav-link" href="#change_title_favicon">Change Site Title and
+											Favicon</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="#change_logo">Changing Brand Logo</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="#customize_menu">Customize Menu</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="#customize_footer">Customize Footer</a>
+									</li>
+								</ul>
+								</li>
+
+								<li class="nav-item">
+								<a class="nav-link" href="#gsap"><img src="assets/images/icon/gsap_icon.png">GSAP Animation</a>
+									<span class="icon">
+										<i class="icon_plus"></i>
+										<i class="icon_minus-06"></i>
+									</span>
+								<ul class="submenu dropdown_nav">
+									<li class="sub-nav nav-item ">
+										<a class="nav-link" href="#anim_hook">Added animation with custom hook</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="#anim_use">Used the animation inside component</a>
+									</li>
+								</ul>
+								</li>
+	
+								<li class="nav-item">
+									<a class="nav-link" href="#pages"><img src="assets/images/icon/writer.png"> Pages</a>
+									<span class="icon">
+										<i class="icon_plus"></i>
+										<i class="icon_minus-06"></i>
+									</span>
+									<ul class="submenu dropdown_nav">
+										<li class="sub-nav nav-item ">
+											<a class="nav-link" href="#404">404 page</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#portfolio_data">Portfolio</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#blog_data">Blog</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#product_data">Product</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="nav-item">
+								<a class="nav-link" href="#template_options"><img src="assets/images/icon/settings.png">Template Options</a>
+									<span class="icon">
+										<i class="icon_plus"></i>
+										<i class="icon_minus-06"></i>
+									</span>
+									<ul class="submenu dropdown_nav">
+										<li class="sub-nav nav-item ">
+											<a class="nav-link" href="#change_color">Changing template colors</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#typography">Typography</a>
+										</li>
+									</ul>
+							</li>
+								<li class="nav-item">
+								<a class="nav-link" href="#support"><img src="assets/images/icon/headphone.png">Support</a>
+								</li>
+							</ul>
+						<!-- </nav> -->
+					</aside>
+				</div>
+				<div class="col-xl-9 col-lg-12">
+					<div class="main-content">
+						<main class="main">
+							<div class="filterable-wrapper">
+								<article id="getting_started" class="section-main doc-section">
+									<div class="steps-panel">
+										<ol class="ordered-list">
+											<li>
+												<strong>Item Name : </strong>Agntix - Digital Agency & Creative Portfolio NextJs Template
+											</li>
+											<li>
+												<strong>Created: </strong>17 September 2025
+											</li>
+											<li><strong>Item Version:</strong> v0.1.0</li>
+											<li>
+												<strong>Author : </strong>
+												<a href="https://themeforest.net/user/aqlova/portfolio" target="_blank">aqlova</a>
+											</li>
+											<li>
+												<strong>Support Ticket: </strong>
+												<a href="https://help.aqlova.com/" target="_blank">https://help.aqlova.com/</a>
+											</li>
+										</ol>
+									</div>	
+									<figure>
+										<img class="max-100" src="assets/images/screenshot.jpg" alt="">
+									</figure>
+			
+									<section id="introduction">
+										<h2>Introduction</h2>
+										<h4 class="title">Agntix - Digital Agency & Creative Portfolio NextJs Template</h4>
+										<div class="top-support">For any support please don't hesitate to contact us at <a href="https://help.aqlova.com/"><b>Support Center</b></a>. We provide 13 hours real-time support for our customers.</div>
+										<p>We would like to thank you for choosing Agntix - Digital Agency & Creative Portfolio NextJs Template.</p>
+									</section>
+									<!-- End of #getting_started -->
+									<section id="requirements">
+                                     <h2>Requirements</h2>
+									 <p>There are system requirements in order to install and setup Agntix - Digital Agency & Creative Portfolio NextJs Template and its components properly. Make sure that you are
+												installed <strong>node.js</strong> and
+												<strong>Yarn</strong>.
+											</p>
+
+									  <h4>For nodejs go here <a target="_blank"
+													href="https://nodejs.org/en/">Nodejs <i
+														class="icon_link_alt"></i></a></h4>
+										<figure>
+												<img class="max-100" src="assets/images/nodejs_version.png" alt="">
+										</figure>
+
+									  <h4>For yarn go here <a target="_blank"
+													href="https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable">Yarn
+													<i class="icon_link_alt"></i></a></h4>
+											<figure>
+												<img class="max-100" src="assets/images/yarn_install.png" alt="">
+											</figure>
+
+									  <h4>Install Yarn</h4>
+											<figure>
+												<img class="max-100" src="assets/images/global_yarn.png" alt="">
+											</figure>
+
+									<h3>Getting started</h3>
+									<p>The template is easy to customize, ensuring a unique and professional look for your business. Get ahead of the competition and stand out in the market with our React Nextjs template for businesses.</p>
+									<h4>Template Features</h4>
+									<div class="steps-panel">
+										<ul class="ordered-list">
+											<li><b>React JS</b></li>
+											<li><b>Next JS</b></li>
+											<li><b>Typescript</b></li>
+											<li>Bootstrap v5.x</li>
+											<li>Font-awesome</li>
+											<li>jQuery</li>
+											<li>Gsap Animation Included.</li>
+											<li>Webgl Animation Included.</li>
+											<li>Three.js Animation Included.</li>
+											<li>Scroll Animation Included.</li>
+											<li>Hover Animation Included.</li>
+											<li>Distortion Animation Included.</li>
+											<li>Split Text Animation Included.</li>
+											<li>Scroll Magic Animation Included.</li>
+											<li>Hover Effect Animation Included.</li>
+											<li>45+ Awesome Homepage</li>
+											<li>Responsive Design</li>
+											<li>Pixel Perfect Design</li>
+											<li>Clean Code &amp; Unique Design</li>
+											<li>Easy to Customize</li>
+										</ul>
+									</div>
+
+									</section>
+									<!-- End of #requirements -->
+									<section id="what_included"> 
+										<h3>What's Included</h3>
+										<p>After purchasing Agntix Digital Agency & Creative Portfolio NextJs Template on themeforest.net with your
+											Envato account, go to your Download page. You can choose to download Agntix Digital Agency & Creative Portfolio NextJs Template package which contains the following files:</p>
+										<figure>
+											<img class="max-100" src="assets/images/include/1.png" alt="">
+										</figure>
+										<h4>The contents of the template  package downloaded from ThemeForest</h4>	
+										<div class="steps-panel">
+											<ul class="ordered-list">
+												<li><strong>Agntix</strong> - An HTML Template file.  this file you can edit and use for your business.</li>
+												<li><strong>Documentation</strong> -  This folder contains what you are reading now :)</li>
+											</ul>
+										</div>
+									</section>
+									<!-- End of #what_included -->
+								</article>
+
+
+								<article id="react_installation" class="section-main doc-section">
+									<section>
+										<h2>React Installation</h2>
+										<p>Please follow the instructions.</p>
+										<div class="steps-panel">
+											<ol class="ordered-list">
+												<li><strong>For local host:</strong> -
+													<ol class="ordered-list">
+														<li>Open you command prompt</li>
+														<li>npm install or npm install --legacy-peer-deps</li>
+														<li>npm run dev (will start the dev server at
+															<strong>http://loaclhost:3000</strong>)
+														</li>
+													</ol>
+												</li>
+											</ol>
+											<br>
+											<ol class="ordered-list">
+												<li><strong>To deploy a Next.js application on Vercel, you can follow
+														these steps:</strong> -
+													<ol class="ordered-list">
+														<li>Sign up for an account on Vercel if you don't have one
+															already.</li>
+														<li>Connect your GitHub, GitLab, or Bitbucket repository where
+															your Next.js application is hosted.</li>
+														<li>Import your repository on Vercel and select the Next.js
+															project to be deployed.</li>
+														<li>Vercel will automatically detect your Next.js application
+															and perform the necessary build and deployment steps.</li>
+														<li>Once the deployment is complete, you'll be able to access
+															your application using the URL provided by Vercel.</li>
+													</ol>
+												</li>
+											</ol>
+										</div>
+									</section>
+									<!-- End of #installation -->
+									<!-- End of #using_ftp_uploader -->
+								</article>
+
+								<article id="template" class="section-main doc-section">
+									<section>
+										<h2>Template Site Setting</h2>
+
+									<h3>Change Site Title, Favicon and Page Title</h3>
+										<p>To change your Site title and Favicon open the Bhume Real estate in
+											your editor and go to the location by following screenshot which are given
+											bellow.</p>
+									</section>
+
+									<section id="change_title_favicon">
+									<figure>
+										<img src="assets/images/site-favicon.png" alt="3.1.1" class="doc-image">
+									<figcaption class="text-center">You can change <b>favicon</b> here</figcaption>
+									</figure>
+                                     <figure>
+										<img src="assets/images/change-title.png" alt="3.1.1" class="doc-image">
+										<figcaption class="text-center">You can change <b>title</b> here</figcaption>
+									</figure>
+									</section>
+
+										<section id="change_logo">
+									<figure>
+										<img src="assets/images/change_logo.png" alt="3.1.1" class="doc-image">
+									<figcaption class="text-center">You can change <b>favicon</b> here</figcaption>
+									</figure>
+									</section>
+
+										<section id="customize_menu">
+										<h3>Customize Menu</h3>
+										<p>To customize menu do the following:</p>
+										<div class="steps-panel">
+											<ol class="ordered-list">
+												<li>From the project folder go to <span class="direction_steps"><span
+															class="direction_step">src </span>
+															<span class="direction_step">data</span>
+															<span class="direction_step">header-menu</span>
+														<span class="direction_step">menuData.ts</span><span
+															class="direction_step">Open the menu you want to
+															use</span></span></li>
+												<li>Then customize the menu</li>
+											</ol>
+										</div>
+										<figure>
+											<img src="assets/images/nav-menus.png" alt="3.1.1" class="doc-image">
+											<figcaption class="text-center">Customize the menu</figcaption>
+										</figure>
+									</section>
+
+
+									<section id="customize_footer">
+										<h3>Customize Footer</h3>
+										<p>To customize footer data do the following:</p>
+										<div class="steps-panel">
+											<ol class="ordered-list">
+												<li>From the project folder go to <span class="direction_steps"><span
+															class="direction_step">src </span>
+														<span class="direction_step">layouts</span>
+														<span class="direction_step">Footers</span>
+														<span class="direction_step">Open the footer you
+															want to use</span></span></li>
+												<li>Then customize the footer</li>
+											</ol>
+										</div>
+										<figure>
+											<img src="assets/images/site-footers.png" alt="3.1.1" class="doc-image">
+											<figcaption class="text-center">Customize the footer</figcaption>
+										</figure>
+									</section>
+								</article>
+
+							<!-- gsap animation -->
+								<article id="gsap" class="section-main doc-section">
+								<section>
+									<h2>GSAP Animation</h2>
+
+									<h3>How I Used Hook and Component</h3>
+									<p>
+									I created a custom <b>hook</b> for GSAP animation logic (like fade-in, split text, scroll trigger, etc.)
+									to keep the code clean and reusable. After that, I imported and applied the hook inside my
+									<b>component</b>, so the animations run automatically when the component is rendered.
+									</p>
+								</section>
+
+								<section id="anim_hook">
+									<figure>
+									<img src="assets/images/gsap_anim_hook.png" alt="animation-hook" class="doc-image">
+									<figcaption class="text-center">
+										Example of creating animation with <b>hook</b> (fade animation, split text, scroll trigger setup)
+									</figcaption>
+									</figure>
+								</section>
+
+								<section id="anim_use">
+									<figure>
+									<img src="assets/images/use_gsap.png" alt="animation-use" class="doc-image">
+									<figcaption class="text-center">
+										Example of using the animation inside <b>component</b> with <code>useGSAP</code> and custom hook
+									</figcaption>
+									</figure>
+								</section>
+								</article>
+								<!-- gsap animation end -->
+						
+								<article id="pages" class="section-main doc-section">
+									<section id="404">
+										<h3>404</h3>
+										<p>To change 404 and setting you can change by following this screenshot here.
+										</p>
+										<div class="steps-panel">
+											<ol class="ordered-list">
+												<li>From the project folder go to <span class="direction_steps">
+														<span class="direction_step">src </span>
+														<span class="direction_step">app</span>
+														<span class="direction_step">not-found.tsx</span>
+														<span class="direction_step">Open the page you want to
+															use</span>
+													</span></li>
+												<li>Then customize the 404 data</li>
+											</ol>
+										</div>
+										<figure>
+											<img src="assets/images/not_found.png" alt="3.1.1" class="doc-image">
+											<figcaption class="text-center">Customize the 404</figcaption>
+										</figure>
+									</section>
+
+									<section id="portfolio_data">
+										<h3>Customize Portfolio Data</h3>
+										<p>To change Portfolio data and setting you can change by following this screenshot here.</p>
+										<div class="steps-panel">
+											<ol class="ordered-list">
+												<li>From the project folder go to <span class="direction_steps">
+													<span class="direction_step">src </span>
+													<span class="direction_step">data</span>
+													<span class="direction_step">portfolio.ts</span>
+													<span class="direction_step">Open the data you want to use</span>
+												</span></li>
+												<li>Then customize the portfolio data</li>
+											</ol>
+										</div>
+										<figure>
+											<img src="assets/images/portfolio_data.png" alt="3.1.1" class="doc-image">
+											<figcaption class="text-center">Customize the portfolio data</figcaption>
+										</figure>
+									</section>
+
+									<section id="blog_data">
+										<h3>Customize blog Data</h3>
+										<p>To change blog data and setting you can change by following this screenshot here.</p>
+										<div class="steps-panel">
+											<ol class="ordered-list">
+												<li>From the project folder go to <span class="direction_steps">
+													<span class="direction_step">src </span>
+													<span class="direction_step">data</span>
+													<span class="direction_step">blogData.ts</span>
+													<span class="direction_step">Open the blog data you want to use</span>
+												</span></li>
+												<li>Then customize the blog data</li>
+											</ol>
+										</div>
+										<figure>
+											<img src="assets/images/blog_data.png" alt="3.1.1" class="doc-image">
+											<figcaption class="text-center">Customize the blog data</figcaption>
+										</figure>
+									</section>
+									<section id="product_data">
+										<h3>Customize product Data</h3>
+										<p>To change product data and setting you can change by following this screenshot here.</p>
+										<div class="steps-panel">
+											<ol class="ordered-list">
+												<li>From the project folder go to <span class="direction_steps">
+													<span class="direction_step">src </span>
+													<span class="direction_step">data</span>
+													<span class="direction_step">productData.ts</span>
+													<span class="direction_step">Open the product data you want to use</span>
+												</span></li>
+												<li>Then customize the product data</li>
+											</ol>
+										</div>
+										<figure>
+											<img src="assets/images/product_data.png" alt="3.1.1" class="doc-image">
+											<figcaption class="text-center">Customize the product data</figcaption>
+										</figure>
+									</section>
+								</article>
+
+								<article id="template_options" class="section-main doc-section">
+								<section id="change-color">
+										<h3>Changing template colors</h3>
+										<div class="steps-panel">
+											<ol class="ordered-list">
+												<li>Open the <strong>colors.scss</strong> file from <strong>public &gt; assets &gt; scss &gt;
+													utils </strong> folder with a text-editor.</li>
+												<li>Change the right-side values of the variables to change any default colors of your
+													site.</li>
+												<li>Save your file.</li>
+											</ol>
+										</div>
+										<figure>
+											<img src="assets/images/color_change.png" alt="4.1.1" class="doc-image">
+										</figure>
+								</section>
+								<section id="typography">
+										<h3>Changing template colors</h3>
+										<div class="steps-panel">
+											<ol class="ordered-list">
+												<li>Open the <strong>colors.scss</strong> file from <strong>public &gt; assets &gt; scss &gt;
+													utils </strong> folder with a text-editor.</li>
+												<li>Change the right-side values of the variables to change any default colors of your
+													site.</li>
+												<li>Save your file.</li>
+											</ol>
+										</div>
+										<figure>
+											<img src="assets/images/typography.png" alt="4.1.2" class="doc-image">
+										</figure>
+								</section>
+								</article>
+
+		
+
+								<article id="support" class="section-main doc-section">
+									<section id="getting_started7">
+										<h3>Support</h3>
+										<p style="color:red;font-weight:bold;">If you face any issue please contact us at 
+											<a class="black-color" href="https://help.aqlova.com/">Support Ticket</a>. We provide 15 hours real-time support for our customers.</p>
+										<p>Thank you for purchasing our Template.</p>
+										<p class="mt50"></p>
+									</section>
+								</article>	
+								<!-- End of #getting_started1-4 -->
+		
+							</div>
+		
+
+		
+							<!-- End of .filterable-wrapper -->
+						</main>
+					</div>
+				</div>
+			</div>
+			<!-- End of .main-content -->
+		</div>
+		<!-- End of .container -->
+	</div>
+	<!-- End of .main-content -->
+
+	<footer class="tp-footer">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-8">
+					<div class="page-footer">
+						<p>© 2025 All Rights Reserved by <a href="https://themeforest.net/user/aqlova/portfolio">aqlova</a>.</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="social-footer text-md-right">
+						<a target="_blank" href="https://www.facebook.com/themepure.net"><i class="social_facebook"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+	<!-- End of .page-footer -->
+
+	<!-- Javascripts
+		======================================= -->
+	<!-- jQuery -->
+	<script src="assets/js/vendor/jquery.min.js"></script>
+	<script src="assets/js/vendor/jquery-migrate.min.js"></script>
+	<script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+	<!-- jQuery Easing Plugin -->
+	<script src="assets/js/vendor/easing-1.3.js"></script>
+	<!-- Custom Script -->
+	<script src="assets/js/onpage-menu.js"></script>	
+	<script src="assets/js/main.js"></script>	
+
+</body>
+</html>
