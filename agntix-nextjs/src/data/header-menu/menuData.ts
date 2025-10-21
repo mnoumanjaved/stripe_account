@@ -311,7 +311,7 @@ const headerMenuData:MenuItem[] = [
       },
       {
         title: "Get In Touch",
-        link: "/contact",
+        link: "/launch-brainstorm",
         pluseIncon: false
       },
     ]

@@ -29,20 +29,50 @@ const CheckoutMain = () => {
         large: false,
     });
 
+    // Custom amount state
+    const [customAmount, setCustomAmount] = useState<string>('');
+
     // Calculate total based on selected options
     const calculateTotal = () => {
         let total = 0;
         if (coffeeOptions.small) total += 5;
         if (coffeeOptions.medium) total += 10;
         if (coffeeOptions.large) total += 15;
+
+        // Add custom amount if entered
+        const customValue = parseFloat(customAmount);
+        if (!isNaN(customValue) && customValue > 0) {
+            total += customValue;
+        }
+
         return total;
     };
 
     const handleCoffeeOptionChange = (option: 'small' | 'medium' | 'large') => {
+        // When selecting a preset option, clear custom amount
+        setCustomAmount('');
         setCoffeeOptions(prev => ({
             ...prev,
             [option]: !prev[option]
         }));
+    };
+
+    const handleCustomAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+
+        // Only allow numbers and decimal point
+        if (value === '' || /^\d*\.?\d*$/.test(value)) {
+            setCustomAmount(value);
+
+            // If user enters custom amount, uncheck all preset options
+            if (value && parseFloat(value) > 0) {
+                setCoffeeOptions({
+                    small: false,
+                    medium: false,
+                    large: false,
+                });
+            }
+        }
     };
 
     // Initialize custom cursor and background styles
@@ -88,6 +118,12 @@ const CheckoutMain = () => {
                 }
                 if (coffeeOptions.large) {
                     cartItems.push({ id: 3, name: 'Buy me a coffee ☕ - Large', price: 15, quantity: 1 });
+                }
+
+                // Add custom amount if entered
+                const customValue = parseFloat(customAmount);
+                if (!isNaN(customValue) && customValue > 0) {
+                    cartItems.push({ id: 4, name: 'Buy me a coffee ☕ - Custom Amount', price: customValue, quantity: 1 });
                 }
 
                 // Create checkout session
@@ -204,6 +240,32 @@ const CheckoutMain = () => {
                                                             </label>
                                                         </div>
                                                         <span style={{ opacity: coffeeOptions.large ? 1 : 0.5 }}>$15.00</span>
+                                                    </li>
+
+                                                    {/* -- custom amount input -- */}
+                                                    <li className="tp-order-info-list-desc">
+                                                        <div className="d-flex align-items-center" style={{ flex: 1 }}>
+                                                            <label htmlFor="coffee-custom" className="mb-0 me-2">
+                                                                Custom Amount ($):
+                                                            </label>
+                                                            <input
+                                                                type="text"
+                                                                id="coffee-custom"
+                                                                value={customAmount}
+                                                                onChange={handleCustomAmountChange}
+                                                                placeholder="0.00"
+                                                                className="form-control"
+                                                                style={{
+                                                                    width: '100px',
+                                                                    padding: '5px 10px',
+                                                                    border: '1px solid #ddd',
+                                                                    borderRadius: '4px',
+                                                                }}
+                                                            />
+                                                        </div>
+                                                        <span style={{ opacity: customAmount && parseFloat(customAmount) > 0 ? 1 : 0.5 }}>
+                                                            ${customAmount && !isNaN(parseFloat(customAmount)) ? parseFloat(customAmount).toFixed(2) : '0.00'}
+                                                        </span>
                                                     </li>
 
                                                     {/* -- subtotal -- */}

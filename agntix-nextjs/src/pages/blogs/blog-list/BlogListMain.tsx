@@ -10,6 +10,8 @@ import { fadeAnimation } from '@/hooks/useGsapAnimation';
 import useScrollSmooth from '@/hooks/useScrollSmooth';
 import { useGSAP } from '@gsap/react';
 import blogData from '@/data/blogData';
+import { useBlogPosts } from '@/hooks/useBlogPosts';
+import { useState } from 'react';
 
 const BlogListMain = () => {
     // Initialize custom cursor and optional background styles
@@ -17,6 +19,17 @@ const BlogListMain = () => {
 
     // Enable smooth scroll animations
     useScrollSmooth();
+
+    // Fetch blog posts from Supabase
+    const [currentPage, setCurrentPage] = useState(0);
+    const postsPerPage = 10;
+    const { posts: supabasePosts, loading, error } = useBlogPosts({
+        limit: postsPerPage,
+        offset: currentPage * postsPerPage
+    });
+
+    // Combine Supabase posts with static fallback data
+    const displayPosts = supabasePosts.length > 0 ? supabasePosts : blogData.slice(25, 29);
 
     useGSAP(() => {
         const timer = setTimeout(() => {
@@ -45,7 +58,16 @@ const BlogListMain = () => {
                                 <div className="row">
                                     <div className="col-lg-12">
                                         <div className="tp-blog-list-item-wrap pb-10">
-                                            {blogData.slice(25, 29).map((blog) => (
+                                            {loading ? (
+                                                <div className="text-center py-5">
+                                                    <p>Loading blog posts...</p>
+                                                </div>
+                                            ) : error ? (
+                                                <div className="text-center py-5">
+                                                    <p>Error loading posts. Showing static content.</p>
+                                                </div>
+                                            ) : null}
+                                            {displayPosts.map((blog) => (
                                                 <BlogListItem key={blog.id} blog={blog} />
                                             ))}
                                         </div>

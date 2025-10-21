@@ -1,4 +1,6 @@
 "use client"
+import { useSearchParams } from 'next/navigation';
+import BlogDetailsDynamic from './BlogDetailsDynamic';
 import blogImg from '../../../../public/assets/img/blog/blog-details/blog-details-1.jpg';
 import authorImg from '../../../../public/assets/img/blog/blog-standard/blog-av-2.jpg';
 import authorImg2 from '../../../../public/assets/img/blog/blog-standard/blog-av-1.jpg';
@@ -32,6 +34,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const BlogDeailsMain = () => {
+    const searchParams = useSearchParams();
+    const slug = searchParams.get('slug');
+
+    // If slug is provided, render dynamic blog details
+    if (slug) {
+        return <BlogDetailsDynamic />;
+    }
+
+    // Otherwise, render static content
     // Initialize custom cursor and optional background styles
     useCursorAndBackground();
 

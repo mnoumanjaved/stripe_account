@@ -197,8 +197,8 @@ const mobileMenuData: MenuItem[] = [
         link: "/blog-list-light",
         megaMenu: false,
         submenu: [
-            { title: "Blog Classic Light", link: "/blog-standard-light" },
-            { title: "Blog Listing Light", link: "/blog-list-light" },
+            // { title: "Blog Classic Light", link: "/blog-standard-light" },
+            // { title: "Blog Listing Light", link: "/blog-list-light" },
             {
                 title: "Grid Layout",
                 link: "/blog-grid",
@@ -208,15 +208,15 @@ const mobileMenuData: MenuItem[] = [
                     { title: "2 Col + sidebar Light", link: "/blog-grid-with-sidebar-light" }
                 ]
             },
-            { title: "Masonry Grid Light", link: "/blog-masonry-light" },
-            {
-                title: "Single Layouts",
-                link: "/blog-details-without-sidebar",
-                submenu: [
-                    { title: "Blog Single Post Light", link: "/blog-details-light" },
-                    { title: "Blog No Sidebar Light", link: "/blog-details-without-sidebar-light" }
-                ]
-            }
+            // { title: "Masonry Grid Light", link: "/blog-masonry-light" },
+            // {
+            //     title: "Single Layouts",
+            //     link: "/blog-details-without-sidebar",
+            //     submenu: [
+            //         { title: "Blog Single Post Light", link: "/blog-details-light" },
+            //         { title: "Blog No Sidebar Light", link: "/blog-details-without-sidebar-light" }
+            //     ]
+            // }
         ]
     },
     {
@@ -257,7 +257,7 @@ const mobileMenuData: MenuItem[] = [
         submenu: [
             { title: "Contact Me", link: "/contact-me-light" },
             { title: "Contact Us", link: "/contact-us-light" },
-            { title: "Get In Touch", link: "/contact" }
+            { title: "Get In Touch", link: "/launch-brainstorm" }
         ]
     }
 ];

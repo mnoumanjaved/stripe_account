@@ -36,7 +36,7 @@ const CreativeAgencyHeader = () => {
                                         </button>
                                     </div>
                                     <div className="tp-header-5-button d-none d-md-block">
-                                        <a className="tp-btn-red-border" href="http://localhost:3003" target="_blank" rel="noopener noreferrer">Get in Touch</a>
+                                        <a className="tp-btn-red-border" href="/launch-brainstorm">Get in Touch</a>
                                     </div>
                                 </div>
                             </div>
