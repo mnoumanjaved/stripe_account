@@ -1,6 +1,6 @@
 "use client"
-import MobileApplicationTestimonial from '@/components/testimonial/MobileApplicationTestimonial';
-import MobileApplicationFaq from '@/components/faq/MobileApplicationFaq';
+import CreativeAgencyTestimonial from '@/components/testimonial/CreativeAgencyTestimonial';
+import ServiceThreeFaq from '@/components/faq/ServiceThreeFaq';
 import CreativeAgencyFooter from '@/layouts/footers/CreativeAgencyFooter';
 import { useCursorAndBackground } from '@/hooks/useCursorAndBackground';
 import InnerPriceArea from '@/components/price-area/InnerPriceArea';
@@ -41,8 +41,8 @@ const PricingMain = () => {
                     <main>
                         <PriceHero />
                         <InnerPriceArea />
-                        <MobileApplicationTestimonial className="ff-inter" />
-                        <MobileApplicationFaq />
+                        <CreativeAgencyTestimonial className="ff-inter" />
+                        <ServiceThreeFaq />
                     </main>
                     <CreativeAgencyFooter bgColor="#0E0F11" />
                 </div>

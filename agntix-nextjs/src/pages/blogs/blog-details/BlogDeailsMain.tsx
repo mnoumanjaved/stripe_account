@@ -285,17 +285,19 @@ const BlogDeailsMain = () => {
                             <div className="container container-1330">
                                 <div className="row">
                                     <div className="col-xl-8">
-                                        <div className="postbox__comment pt-115 pb-50">
+                                        {/* Comments Section - Commented out as requested */}
+                                        {/* <div className="postbox__comment pt-115 pb-50">
                                             <h3 className="postbox__comment-title">Comments(02)</h3>
                                             <PostboxComment />
-                                        </div>
-                                        <div className="postbox-details-form">
+                                        </div> */}
+                                        {/* Comment Form - Commented out as requested */}
+                                        {/* <div className="postbox-details-form">
                                             <h3 className="postbox-details-form-title">Leave a Reply</h3>
                                             <p>Your email address will not be published. Required fields are marked *</p>
                                             <div className="postbox-details-form-wrapper">
                                                 <PostboxDetailsForm />
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
