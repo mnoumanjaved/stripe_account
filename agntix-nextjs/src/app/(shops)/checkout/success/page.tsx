@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import ShopModernHeader from '@/layouts/headers/ShopModernHeader';
@@ -9,7 +9,7 @@ import BackToTop from '@/components/shared/BackToTop/BackToTop';
 import CartOffcanvas from '@/components/offcanvas/CartOffcanvas';
 import SearchArea from '@/components/search-area/SearchArea';
 
-const CheckoutSuccessPage = () => {
+const CheckoutSuccessContent = () => {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
   const [loading, setLoading] = useState(true);
@@ -29,25 +29,12 @@ const CheckoutSuccessPage = () => {
   }, [sessionId]);
 
   return (
-    <>
-      <div id="magic-cursor" className="cursor-bg-red">
-        <div id="ball"></div>
-      </div>
-
-      <BackToTop />
-      <CartOffcanvas />
-      <SearchArea />
-      <ShopModernHeader />
-
-      <div id="smooth-wrapper">
-        <div id="smooth-content">
-          <main>
-            <section className="tp-cart-area pb-120 pt-200">
-              <div className="container">
-                <div className="row justify-content-center">
-                  <div className="col-xl-8 col-lg-10">
-                    <div className="tp-checkout-place white-bg text-center p-5">
-                      {loading ? (
+    <section className="tp-cart-area pb-120 pt-200">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-xl-8 col-lg-10">
+            <div className="tp-checkout-place white-bg text-center p-5">
+              {loading ? (
                         <div>
                           <h3 className="mb-4">Processing your order...</h3>
                           <div className="spinner-border text-primary" role="status">
@@ -109,6 +96,39 @@ const CheckoutSuccessPage = () => {
                 </div>
               </div>
             </section>
+  );
+};
+
+const CheckoutSuccessPage = () => {
+  return (
+    <>
+      <div id="magic-cursor" className="cursor-bg-red">
+        <div id="ball"></div>
+      </div>
+
+      <BackToTop />
+      <CartOffcanvas />
+      <SearchArea />
+      <ShopModernHeader />
+
+      <div id="smooth-wrapper">
+        <div id="smooth-content">
+          <main>
+            <Suspense fallback={
+              <section className="tp-cart-area pb-120 pt-200">
+                <div className="container">
+                  <div className="row justify-content-center">
+                    <div className="col-xl-8 col-lg-10">
+                      <div className="tp-checkout-place white-bg text-center p-5">
+                        <h3 className="mb-4">Loading...</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            }>
+              <CheckoutSuccessContent />
+            </Suspense>
           </main>
           <ShopModernFooter />
         </div>

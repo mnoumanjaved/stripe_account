@@ -10,6 +10,8 @@ import { fadeAnimation } from '@/hooks/useGsapAnimation';
 import useScrollSmooth from '@/hooks/useScrollSmooth';
 import blogData from '@/data/blogData';
 import { useGSAP } from '@gsap/react';
+import { useBlogPosts } from '@/hooks/useBlogPosts';
+import { useState } from 'react';
 
 const BlogGridMain = () => {
     // Initialize custom cursor and optional background styles
@@ -17,6 +19,17 @@ const BlogGridMain = () => {
 
     // Enable smooth scroll animations
     useScrollSmooth();
+
+    // Fetch blog posts from Supabase
+    const [currentPage, setCurrentPage] = useState(0);
+    const postsPerPage = 6;
+    const { posts: supabasePosts, loading, error } = useBlogPosts({
+        limit: postsPerPage,
+        offset: currentPage * postsPerPage
+    });
+
+    // Combine Supabase posts with static fallback data
+    const displayPosts = supabasePosts.length > 0 ? supabasePosts : blogData.slice(35, 41);
 
     useGSAP(() => {
         const timer = setTimeout(() => {
@@ -42,8 +55,17 @@ const BlogGridMain = () => {
                         <div id="down" className="tp-blog-gird-sidebar-ptb pb-80">
                             <div className="container container-1330">
                                 <div className="row">
+                                    {loading ? (
+                                        <div className="col-12 text-center py-5">
+                                            <p>Loading blog posts...</p>
+                                        </div>
+                                    ) : error ? (
+                                        <div className="col-12 text-center py-5">
+                                            <p>Error loading posts. Showing static content.</p>
+                                        </div>
+                                    ) : null}
                                     {
-                                        blogData.slice(35, 41).map((blog) => (
+                                        displayPosts.map((blog) => (
                                             <BlogGridTwoItem key={blog.id} blog={blog} colClass='col-lg-4 col-md-6' titleFont='' />
                                         ))
                                     }

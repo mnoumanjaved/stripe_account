@@ -1,18 +1,18 @@
 "use client"
 import { fadeAnimation, funfactPanelAnimation, panelAnimation } from '@/hooks/useGsapAnimation';
 import { useCursorAndBackground } from '@/hooks/useCursorAndBackground';
-import HomeMainFunFact from '@/components/funfact/HomeMainFunFact';
+import TeamFunfact from '@/components/funfact/TeamFunfact';
 import BackToTop from '@/components/shared/BackToTop/BackToTop';
 import AboutUsService from '@/components/service/AboutUsService';
 import AboutUsHero from '@/components/hero-banner/AboutUsHero';
 import AboutUsBanner from '@/components/banner/AboutUsBanner';
 import InnerPageHeader from '@/layouts/headers/InnerPageHeader';
 import HomeMainFooter from '@/layouts/footers/HomeMainFooter';
-import HomeMainAbout from '@/components/about/HomeMainAbout';
+import AboutMain from '@/components/about/AboutMain';
 import { textBounceAnimation } from '@/utils/titleAnimation';
 import AboutUsBrand from '@/components/brand/AboutUsBrand';
 import AboutUsAward from '@/components/award/AboutUsAward';
-import HomeMainWork from '@/components/work/HomeMainWork';
+import PortfolioDetailsWork from '@/components/work/PortfolioDetailsWork';
 import AboutUsTeam from '@/components/team/AboutUsTeam';
 import useScrollSmooth from '@/hooks/useScrollSmooth';
 import { useGSAP } from '@gsap/react';
@@ -49,10 +49,10 @@ const AboutUsLightMain = () => {
                         <AboutUsHero />
                         <AboutUsBrand />
                         <AboutUsBanner />
-                        <HomeMainAbout bgColur='#F6F6F9' spacingCls='pb-140' />
+                        <AboutMain bgColur='#F6F6F9' spacingCls='pb-140' />
                         <AboutUsService />
-                        <HomeMainFunFact />
-                        <HomeMainWork />
+                        <TeamFunfact />
+                        <PortfolioDetailsWork />
                         <AboutUsTeam />
                         <AboutUsAward />
                     </main>

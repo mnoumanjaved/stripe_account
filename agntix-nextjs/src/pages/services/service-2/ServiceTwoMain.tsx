@@ -3,12 +3,12 @@ import { charAnimation, fadeAnimation, innerServiceAnimation, panelAnimation, se
 import { useCursorAndBackground } from '@/hooks/useCursorAndBackground';
 import ServiceTwoHero from '@/components/hero-banner/ServiceTwoHero';
 import ServiceTwoBanner from '@/components/banner/ServiceTwoBanner';
-import HomeMainService from '@/components/service/HomeMainService';
-import HomeMainVideo from '@/components/video-area/HomeMainVideo';
+import InnerService from '@/components/service/InnerService';
+import DesignAgencyVideo from '@/components/video-area/DesignAgencyVideo';
 import BackToTop from '@/components/shared/BackToTop/BackToTop';
 import InnerPageHeader from '@/layouts/headers/InnerPageHeader';
 import HomeMainFooter from '@/layouts/footers/HomeMainFooter';
-import HomeMainWork from '@/components/work/HomeMainWork';
+import PortfolioDetailsWork from '@/components/work/PortfolioDetailsWork';
 import useScrollSmooth from '@/hooks/useScrollSmooth';
 import { useGSAP } from '@gsap/react';
 
@@ -48,9 +48,9 @@ const ServiceTwoMain = () => {
                     <main>
                         <ServiceTwoHero />
                         <ServiceTwoBanner />
-                        <HomeMainService />
-                        <HomeMainVideo />
-                        <HomeMainWork />
+                        <InnerService />
+                        <DesignAgencyVideo />
+                        <PortfolioDetailsWork />
                     </main>
                     <HomeMainFooter bgColor='#F6F6F9' quikLinkCls="" socialBtnCls='social-btn-cls'/>
                 </div>

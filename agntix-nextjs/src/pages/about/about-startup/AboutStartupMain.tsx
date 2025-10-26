@@ -1,11 +1,11 @@
 "use client"
 import { eyeAnimation, fadeAnimation, panelAnimation } from '@/hooks/useGsapAnimation';
-import CorporateAgencyBannerTwo from '@/components/banner/CorporateAgencyBannerTwo';
-import CorporateAgencyService from '@/components/service/CorporateAgencyService';
+import AboutModernBanner from '@/components/banner/AboutModernBanner';
+import CreativeAgencyService from '@/components/service/CreativeAgencyService';
 import PersonalPortfolioAward from '@/components/award/PersonalPortfolioAward';
 import AboutModernSuccess from '@/components/success-area/AboutModernSuccess';
-import CorporateAgencyAbout from '@/components/about/CorporateAgencyAbout';
-import CorporateAgencyBrand from '@/components/brand/CorporateAgencyBrand';
+import CreativeAgencyAbout from '@/components/about/CreativeAgencyAbout';
+import CreativeAgencyBrand from '@/components/brand/CreativeAgencyBrand';
 import AboutStartupProject from '@/components/project/AboutStartupProject';
 import CorporateAgencyFooter from '@/layouts/footers/CorporateAgencyFooter';
 import CorporateAgencyHeader from '@/layouts/headers/CorporateAgencyHeader';
@@ -50,10 +50,10 @@ const AboutStartupMain = () => {
                 <div id="smooth-content">
                     <main>
                         <AboutStartupHero />
-                        <CorporateAgencyBannerTwo />
-                        <CorporateAgencyAbout />
-                        <CorporateAgencyBrand />
-                        <CorporateAgencyService />
+                        <AboutModernBanner />
+                        <CreativeAgencyAbout />
+                        <CreativeAgencyBrand />
+                        <CreativeAgencyService />
                         <AboutModernSuccess bgColor='#45653C' />
                         <DesignStudioTeam wrapClass='des-team-inner-style' spacingCls='pb-180' />
                         <PersonalPortfolioAward

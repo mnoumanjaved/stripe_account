@@ -1,4 +1,6 @@
 "use client"
+import { useSearchParams } from 'next/navigation';
+import BlogDetailsDynamic from './BlogDetailsDynamic';
 import blogImg from '../../../../public/assets/img/blog/blog-details/blog-details-1.jpg';
 import authorImg from '../../../../public/assets/img/blog/blog-standard/blog-av-2.jpg';
 import authorImg2 from '../../../../public/assets/img/blog/blog-standard/blog-av-1.jpg';
@@ -32,6 +34,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const BlogDeailsMain = () => {
+    const searchParams = useSearchParams();
+    const slug = searchParams.get('slug');
+
+    // If slug is provided, render dynamic blog details
+    if (slug) {
+        return <BlogDetailsDynamic />;
+    }
+
+    // Otherwise, render static content
     // Initialize custom cursor and optional background styles
     useCursorAndBackground();
 
@@ -274,17 +285,19 @@ const BlogDeailsMain = () => {
                             <div className="container container-1330">
                                 <div className="row">
                                     <div className="col-xl-8">
-                                        <div className="postbox__comment pt-115 pb-50">
+                                        {/* Comments Section - Commented out as requested */}
+                                        {/* <div className="postbox__comment pt-115 pb-50">
                                             <h3 className="postbox__comment-title">Comments(02)</h3>
                                             <PostboxComment />
-                                        </div>
-                                        <div className="postbox-details-form">
+                                        </div> */}
+                                        {/* Comment Form - Commented out as requested */}
+                                        {/* <div className="postbox-details-form">
                                             <h3 className="postbox-details-form-title">Leave a Reply</h3>
                                             <p>Your email address will not be published. Required fields are marked *</p>
                                             <div className="postbox-details-form-wrapper">
                                                 <PostboxDetailsForm />
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
