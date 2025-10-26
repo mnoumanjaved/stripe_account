@@ -73,8 +73,8 @@ const DigitalMarketingHero = () => {
                                     <div className="tp_fade_anim" data-delay=".7">
                                         <a className="tp-btn-black-square" href="/launch-brainstorm">
                                             <span>
-                                                <span className="text-1">Get in Touch</span>
-                                                <span className="text-2">Get in Touch</span>
+                                                <span className="text-1">Let's Start</span>
+                                                <span className="text-2">Let's Start</span>
                                             </span>{" "}
                                             <i>
                                                 <ArrowFour />

@@ -179,7 +179,7 @@ const mobileMenuData: MenuItem[] = [
                 links: [
                     { title: "Classic Stack", link: "/portfolio-details-classic-stack-light" },
                     { title: "Creative Slider", link: "/portfolio-details-creative-slider-light" },
-                    { title: "Gallery", link: "/portfolio-details-gallery-light" },
+                    { title: "Gallery", link: "#" },
                     { title: "Modern", link: "/portfolio-details-modern-light" },
                     { title: "Video", link: "/portfolio-details-video-light" },
                     { title: "Image Comparison", link: "/portfolio-details-image-comparison-light" },
@@ -257,7 +257,7 @@ const mobileMenuData: MenuItem[] = [
         submenu: [
             { title: "Contact Me", link: "/contact-me-light" },
             { title: "Contact Us", link: "/contact-us-light" },
-            { title: "Get In Touch", link: "/launch-brainstorm" }
+            { title: "Let's Start", link: "/brainstorm" }
         ]
     }
 ];

@@ -1,11 +1,9 @@
 import MobileMenus from "@/layouts/subComponents/MobileMenus";
-import logo from "../../../public/assets/img/logo/logo-pink-black.png";
 import MobileOffcanvas from "@/components/offcanvas/MobileOffcanvas";
 import React, { useState } from 'react';
-import Image from "next/image";
 import Link from 'next/link';
 
-const CreativeAgencyHeader = () => {
+const BrainstormHeader = () => {
     const [openOffCanvas, setOpenOffCanvas] = useState(false);
 
     return (
@@ -35,9 +33,6 @@ const CreativeAgencyHeader = () => {
                                             <span></span>
                                         </button>
                                     </div>
-                                    <div className="tp-header-5-button d-none d-md-block">
-                                        <a className="tp-btn-red-border" href="/launch-brainstorm">Let's Start</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -49,16 +44,12 @@ const CreativeAgencyHeader = () => {
                         <MobileMenus />
                     </ul>
                 </nav>
-                {/* -- header area end -- */}
-
             </header>
 
             {/* off canvas */}
             <MobileOffcanvas openOffcanvas={openOffCanvas} setOpenOffcanvas={setOpenOffCanvas} />
-            {/* off canvas */}
-
         </>
     );
 };
 
-export default CreativeAgencyHeader;
+export default BrainstormHeader;

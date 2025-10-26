@@ -5,13 +5,14 @@
 /*----------------------------------------*/
 
 #preloader {
+    display: none !important;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     z-index: 1000;
-    background-color: var(--tp-theme-green);
+    background-color: #ffffff !important;
 }
 .preloader {
     width: 40px;

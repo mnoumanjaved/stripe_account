@@ -2,7 +2,7 @@
 
 import React, { useMemo } from 'react';
 import { motion, PanInfo } from 'framer-motion';
-import { Trigger } from '../types';
+import { Trigger } from '@/lib/brainstorm/types';
 import { CheckIcon, XMarkIcon, ArrowRightIcon } from './icons';
 
 interface TriggerBoardProps {
@@ -57,7 +57,7 @@ const TriggerCard: React.FC<{
 };
 
 const TriggerBoard: React.FC<TriggerBoardProps> = ({ triggers, onSave, onDismiss, onFinish }) => {
-  
+
   const handleAction = (action: 'save' | 'dismiss') => {
     if (triggers.length === 0) return;
     const currentTrigger = triggers[triggers.length - 1];
@@ -71,7 +71,7 @@ const TriggerBoard: React.FC<TriggerBoardProps> = ({ triggers, onSave, onDismiss
   const handleSwipe = (direction: 'left' | 'right') => {
     handleAction(direction === 'right' ? 'save' : 'dismiss');
   };
-  
+
   const reversedTriggers = useMemo(() => [...triggers], [triggers]);
 
   return (
@@ -80,13 +80,13 @@ const TriggerBoard: React.FC<TriggerBoardProps> = ({ triggers, onSave, onDismiss
         <h1 className="text-3xl md:text-4xl font-extrabold text-slate-100">The Board</h1>
         <p className="text-slate-400 mt-2">Curate your triggers. Swipe right to save, left to dismiss.</p>
       </header>
-      
+
       <div className="relative w-full max-w-lg h-80 mb-8">
         {reversedTriggers.length > 0 ? (
           reversedTriggers.map((trigger) => (
-            <TriggerCard 
-                key={trigger.id} 
-                trigger={trigger} 
+            <TriggerCard
+                key={trigger.id}
+                trigger={trigger}
                 onSwipe={handleSwipe}
             />
           ))

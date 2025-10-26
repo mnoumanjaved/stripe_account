@@ -1,0 +1,542 @@
+{
+  "name": "blogGeneration",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 12
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -176,
+        -16
+      ],
+      "id": "1fbb8161-72e6-48dd-a4ef-682509a99ebd",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://google.serper.dev/search",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "AI Agents"
+            },
+            {
+              "name": "apiKey",
+              "value": "15d97cf45a4f43248eda15143ed5f8482730c0b6"
+            },
+            {
+              "name": "gl",
+              "value": "us"
+            },
+            {
+              "name": "hl",
+              "value": "en"
+            },
+            {
+              "name": "type",
+              "value": "search"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        160,
+        -16
+      ],
+      "id": "c2c6a6af-bdfb-433a-be21-da392bc69356",
+      "name": "Trends"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "23b8e8c4-9191-415a-9661-1b60d413528a",
+              "name": "research",
+              "value": "={{ $json.results.map(result => result.content + \" - source: \" + result.url).join(\"\\n\\n\") }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1600,
+        -16
+      ],
+      "id": "ead299c4-554c-4aa7-872f-0741246f9ad4",
+      "name": "Fix Links"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "o1-mini-2024-09-12",
+          "mode": "list",
+          "cachedResultName": "O1-MINI-2024-09-12"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are part of a team that creats world class blog posts. \n\nYou are in charge of internal linking between blog posts. \n\nFor each new blog post that comes across your desk, your job is to look through previously posted blogs and make atleast 5 internal links. \n\nTo choose the best internal linking opportunities you must: \n\n- Read the previous blog post summaries and look through their keywords. If there is a match where the previous blog post is highly relevant, then this is an internal linking opportunity. \n\n- Do not link if it is not highly relevant. Only make a link if it makes sense and adds value for the reader. \n\nOnce you've found the best linking opportunities, you must update the blog post with the internal links. To do this you must: \n\n- Add the link of the previous blog post at the relevant section of the new blog post. Drop the URL at the place which makes most sense. Later we will hyperlink the URL to the word in the blog post which it is placed next to. So your placing is very important. \n\nMake sure to not delete any existing URLs or change anything about the blog post provided to you. You must only add new internal linking URLs and output the revised blog post. \n\nYour output must be the blog post given to you plus the new urls. Don't remove any info. \n\nDon't return the previous blog posts. Only return the current blog post with the internal links added.\n\nCurrent blog Post: \n{{ $('Copywriter').item.json.message.content }}\n\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        432,
+        224
+      ],
+      "id": "385b4f72-dba3-44c6-8ba0-a96a68a13191",
+      "name": "Add internal links",
+      "credentials": {
+        "openAiApi": {
+          "id": "6uXU72Bka3jwbnkt",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Create a slug for the following blog post: \n{{ $('Add internal links').item.json.message.content }}\n\nA slug in a blog post is the part of the URL that comes after the domain name and identifies a specific page. It is typically a short, descriptive phrase that summarizes the content of the post, making it easier for users and search engines to understand what the page is about. For example, in the URL www.example.com/intelligent-agents, the slug is intelligent-agents. A good slug is concise, contains relevant keywords, and avoids unnecessary words to improve readability and SEO. \n\nThe slug must be 4 or 5 words max and must include the primary keyword of the blog post which is {{ $('Choosing Topic').item.json.message.content }}\n\nYour output must be the slug and nothing else so that I can copy and paste your output and put it at the end of my blog post URL to post it right away. "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        880,
+        224
+      ],
+      "id": "e9fcf4e4-3074-4505-b4c5-bf4b8e612698",
+      "name": "Slug"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Extract the blog post title from the following blog post: \n{{ $('Add internal links').item.json.message.content }}\n\n\n\nThe blog post title must include the primary keyword '{{ $('Choosing Topic').item.json.message.content }}' and must inform the users right away of what they can expect from reading the blog post. \n\n- Don't put the output in \"\". The output should just text with no markdown or formatting. \n\nYour output must only be the blog post title and nothing else. "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1280,
+        224
+      ],
+      "id": "ca7db4f9-939c-43b7-adea-6f70e9d744bf",
+      "name": "Title"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Create a good meta description for the following blog post: \n\n{{ $('Add internal links').item.json.message.content }}\n\nA good meta description for a blog post that is SEO-optimized should:\n- Be Concise: Stick to 150-160 characters to ensure the full description displays in search results. \n- Include Keywords: Incorporate primary keywords naturally to improve visibility and relevance to search queries.\n\nPrimary keyword = {{ $('Choosing Topic').item.json.message.content }}\n\n\n- Provide Value: Clearly describe what the reader will learn or gain by clicking the link. \n\n- Be Engaging: Use persuasive language, such as action verbs or a question, to encourage clicks. \n\n- Align with Content: Ensure the description accurately reflects the blog post to meet user expectations and reduce bounce rates. \n\nYour output must only be the meta description and nothing else. \n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1680,
+        224
+      ],
+      "id": "9fe53b00-2e99-4d2b-9b03-983df092933a",
+      "name": "Meta description"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the news items from Serper API response\nconst newsItems = $('Trends').first().json.organic;\n\n// Take the top 5 news items and extract their titles\nconst topNews = newsItems.slice(0, 5);\n\n// Map the titles and join them with commas\nconst resultString = topNews.map(item => item.title).join(', ');\n\n// Return the result in a new JSON property\nreturn [{ json: { result: resultString } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        -16
+      ],
+      "id": "f18b90af-0218-4655-b8d6-26394f063c31",
+      "name": "High search volume keywords"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are part of a team that creates world class blog posts. Your job is to choose the topic for each blog post. \n\nThe blog posts are posted on the website of a [COMPANY NAME + DESCRIPTION + PRODUCTS + TARGET MARKET]. The blog posts are mainly posted as part of an SEO campaign to get [COMPANY NAME] to rank high for its products and services.\n\nIn this instance, you are given a list of 2 keywords which have been trending the most on Google news search over the past few days. \n\nYour job is to pick one which you think would make for the most relevant blog post with the best SEO outcomes for the client. \n\nThe keywords have two attributes: \n\n1. query: This attribute determines the search query that users have been searching for which is trending. \n\n2. value: This attribute determines what percentage increase the keyword has seen compared to previous periods (i.e. the increase in search volume). \n\nYou must choose one out of the taking into consideration both the relevance of the keyword for [COMPANY NAME's] SEO efforts and the comparative trendiness determined by the value attribute. \n\nOutput the keyword you decided to post a blog on and nothing else. Don't explain your reasoning. Just output the keyword. \n\nThis instance: \n\nKeyword 1:\n{{ $('4 Most Trending').item.json['most-trending']['#1'].toJsonString() }} \n\nKeyword2: \n{{ $('4 Most Trending').item.json['most-trending']['#2'].toJsonString() }} "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1024,
+        -16
+      ],
+      "id": "72a51088-0e33-41c6-babb-1735a326dd9f",
+      "name": "Choosing Topic",
+      "credentials": {
+        "openAiApi": {
+          "id": "6uXU72Bka3jwbnkt",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are part of a team that creates world class blog posts for SEO purposes for my company which is SalesAura. \n\nEvery day your team posts one blog post of diffusers that is inspired by the most trending research related to the diffusers in this week. As the copywriter for the blogs, you are provided with the folling information: \n\n- Query: The topic of this weeks trending blog post. This is the most trending articles in the space. you have to craft similar for my company which is Hotel Selction\n\n- Other keywords: This is a list of some high search volume keywords. The goal is to include some of these into the blog post naturally. This is only optional and dependant on the natural dependancy of this weeks topic to the blog post. Include any of the keywords in the blog, if you can do so naturally without changing the meaning of the blog post.  \n\n\n- Research findings: This is research found from very reputable resources in relation to the topic of the post. Your blog post should be for company Hotel Selection, you have to use the research intelligently to compliment your business products\n\n\nGiven the said info, you must write the blog post.\n \nThe blog post must: \n- You must use the \"getCompanyInfo\" tool to craft the blog for my company SalesAura promoting their services and product you can query multiple times to get as many information of the company before writing the blog \n\n- Craft blog title, H1 header and early in the introduction. \n\n- Try to compliment all detail in research findings by comparing and promoting my companies product. When including the research points, make sure to also include their source URL so that the copywriter can use them as hyperlinks. (source url for each statement is given in the research findings next to the text)\n\n- Be very detailed. \n\n- Be using tone similar to that of a reporter, invoking curiosity and excitement and thrill in the readers.\n\n- Flow naturally and make sense. \n\n- Be at minimum 1500 to 2000 words long. \n\n- Be suitable for a year 5 reading level. \n\nMake sure to create the entire blog post draft in your first output. Don't stop or cut it short. \n\nYour output must be the blog post and nothing else.\n\nHere are the details for inspiration for next blog post make sure to intelligently use the below information only when applicable and promote my products and my company Hotel selection: \n\nQuery: \n{{ $('Choosing Topic').item.json.message.content }}\n\nDetailed Research: \n{{ $json.research }}\n\nWrite the blog post.\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1760,
+        -16
+      ],
+      "id": "ca49230f-c260-4fd0-9b41-995c2624d258",
+      "name": "Copywriter"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer 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"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"query\": \"{{ $('Choosing Topic').item.json.message.content.replace(/^\"|\"$/g, '') }}\",\n  \"search_depth\": \"advanced\",\n  \"include_domains\": [],\n  \"exclude_domains\": [],\n  \"max_results\": 10\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1424,
+        -16
+      ],
+      "id": "6af316af-983c-4ea8-b91f-46b6dd2fcc20",
+      "name": "Research"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"most-trending\": {\n\n    \"#1\": { \n\n      \"query\":\"{{ $json.organic[0].title }}\",\n      \"score\":\"100\"\n\n    },\n\n\n    \"#2\": { \n\n      \"query\":\"{{ $json.organic[1].title }}\",\n      \"score\":\"90\"\n\n    },\n\n    \"#3\":{\n      \"query\":\"{{ $json.organic[2].title }}\",\n      \"score\":\"85\"\n    },\n\n    \"#4\":{\n      \"query\":\"{{ $json.organic[3].title }}\",\n      \"score\":\"80\"\n    }\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        464,
+        -16
+      ],
+      "id": "38e52f60-7a0c-4e0e-ae0d-4969e3cccf9c",
+      "name": "4 Most Trending"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "d3zC5KSizarXTStv",
+          "mode": "list",
+          "cachedResultName": "SalesAura-Blogs-Image"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        224,
+        496
+      ],
+      "id": "f5ba626a-d6c0-42bf-8f74-cab3408a7100",
+      "name": "Get Image"
+    },
+    {
+      "parameters": {
+        "tableId": "blog_post",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "title",
+              "fieldValue": "={{ $('Title').item.json.message.content }}"
+            },
+            {
+              "fieldId": "content",
+              "fieldValue": "={{ $('Add internal links').item.json.message.content }}"
+            },
+            {
+              "fieldId": "slug",
+              "fieldValue": "={{ $('Slug').item.json.message.content }}"
+            },
+            {
+              "fieldId": "metadescription",
+              "fieldValue": "={{ $('Meta description').item.json.message.content }}"
+            },
+            {
+              "fieldId": "imagename",
+              "fieldValue": "={{ $json.name }}"
+            },
+            {
+              "fieldId": "webviewlink",
+              "fieldValue": "={{ $json.webViewLink }}"
+            },
+            {
+              "fieldId": "tumbnaillink",
+              "fieldValue": "={{ $json.thumbnailLink }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        432,
+        496
+      ],
+      "id": "5d9b9d26-8368-42cb-a270-c40e9fa6ffaa",
+      "name": "Create a row"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Trends",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trends": {
+      "main": [
+        [
+          {
+            "node": "4 Most Trending",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fix Links": {
+      "main": [
+        [
+          {
+            "node": "Copywriter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add internal links": {
+      "main": [
+        [
+          {
+            "node": "Slug",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slug": {
+      "main": [
+        [
+          {
+            "node": "Title",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Title": {
+      "main": [
+        [
+          {
+            "node": "Meta description",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Meta description": {
+      "main": [
+        [
+          {
+            "node": "Get Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "High search volume keywords": {
+      "main": [
+        [
+          {
+            "node": "Choosing Topic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Choosing Topic": {
+      "main": [
+        [
+          {
+            "node": "Research",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Copywriter": {
+      "main": [
+        [
+          {
+            "node": "Add internal links",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Research": {
+      "main": [
+        [
+          {
+            "node": "Fix Links",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4 Most Trending": {
+      "main": [
+        [
+          {
+            "node": "High search volume keywords",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Image": {
+      "main": [
+        [
+          {
+            "node": "Create a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "537ceb31-1cb7-4fb3-ac86-baf57ecc3804",
+  "meta": {
+    "instanceId": "644888e0e18ca2788ac90909622acd6f0669819bd495a684a5fe1ced3a53c29a"
+  },
+  "id": "RpkQyg1xEqNkFe7c",
+  "tags": []
+}

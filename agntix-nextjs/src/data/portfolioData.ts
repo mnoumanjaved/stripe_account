@@ -297,42 +297,42 @@ const portfolioData: PortfolioDT[] = [
     image: portfolioThumb1,
     title: "Olivia Rivers",
     category: "Branding - 2025",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   {
     id: 29,
     image: portfolioThumb2,
     title: "Corporate Branding",
     category: "Branding - 2025",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   {
     id: 30,
     image: portfolioThumb3,
     title: "Pastel Ladies",
     category: "Branding - 2025",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   {
     id: 31,
     image: portfolioThumb4,
     title: "Taller Alvarado",
     category: "Branding - 2025",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   {
     id: 32,
     image: portfolioThumb5,
     title: "Simple Logistics",
     category: "Branding - 2025",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   {
     id: 33,
     image: portfolioThumb6,
     title: "Electro Hub",
     category: "Branding - 2025",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   //portfolio col-1 data end
 
@@ -342,63 +342,63 @@ const portfolioData: PortfolioDT[] = [
     image: portfolioThumb7,
     title: "Olivia Rivers",
     category: "Branding - 2025",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   {
     id: 35,
     image: portfolioThumb8,
     title: "Corporate Branding",
     category: "Agency - 2025",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   {
     id: 36,
     image: portfolioThumb9,
     title: "Mobile app",
     category: "Agency - 2025",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   {
     id: 37,
     image: portfolioThumb10,
     title: "Simple Logistics",
     category: "Agency - 2025",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   {
     id: 38,
     image: portfolioThumb11,
     title: "Electro Hub",
     category: "Agency - 2025",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   {
     id: 39,
     image: portfolioThumb12,
     title: "Soko Project",
     category: "Agency - 2025",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   {
     id: 40,
     image: portfolioThumb13,
     title: "Pastel Ladies",
     category: "Branding - 2025",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   {
     id: 41,
     image: portfolioThumb14,
     title: "Venus Rebrand",
     category: "Branding - 2025",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   {
     id: 42,
     image: portfolioThumb15,
     title: "Taller Alvarado",
     category: "Branding - 2025",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   //portfolio col-3 data end
 
@@ -409,7 +409,7 @@ const portfolioData: PortfolioDT[] = [
     title: "Olivia Rivers",
     categories: ["Website", "Services"],
     colClass: "col-lg-6",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   {
     id: 44,
@@ -417,7 +417,7 @@ const portfolioData: PortfolioDT[] = [
     title: "Isla Monroe",
     categories: ["Website", "Services"],
     colClass: "col-lg-6",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   {
     id: 45,
@@ -425,7 +425,7 @@ const portfolioData: PortfolioDT[] = [
     title: "Ella Whitmore",
     categories: ["Website", "Services"],
     colClass: "col-lg-12",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   {
     id: 46,
@@ -433,7 +433,7 @@ const portfolioData: PortfolioDT[] = [
     title: "Nora Sinclair",
     categories: ["Website", "Services"],
     colClass: "col-lg-6",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   {
     id: 47,
@@ -441,7 +441,7 @@ const portfolioData: PortfolioDT[] = [
     title: "Hazel Quinn",
     categories: ["Website", "Services"],
     colClass: "col-lg-6",
-    link: "/portfolio-details-gallery-light",
+    link: "#",
   },
   //portfolio masonry data end
 
@@ -502,42 +502,42 @@ const portfolioData: PortfolioDT[] = [
     image: perspectiveImg1,
     category: "Branding",
     title: "Keepgrading",
-    link: "/portfolio-details-gallery-light"
+    link: "#"
   },
   {
     id: 56,
     image: perspectiveImg2,
     category: "Branding",
     title: "Gráfico",
-    link: "/portfolio-details-gallery-light"
+    link: "#"
   },
   {
     id: 57,
     image: perspectiveImg3,
     category: "Branding",
     title: "Diseño",
-    link: "/portfolio-details-gallery-light"
+    link: "#"
   },
   {
     id: 58,
     image: perspectiveImg4,
     category: "Branding",
     title: "Keepgrading",
-    link: "/portfolio-details-gallery-light"
+    link: "#"
   },
   {
     id: 59,
     image: perspectiveImg5,
     category: "Branding",
     title: "Stickers Pack",
-    link: "/portfolio-details-gallery-light"
+    link: "#"
   },
   {
     id: 60,
     image: perspectiveImg6,
     category: "Branding",
     title: "Dinámica",
-    link: "/portfolio-details-gallery-light"
+    link: "#"
   }
   //portfolio perspective slider data end
 

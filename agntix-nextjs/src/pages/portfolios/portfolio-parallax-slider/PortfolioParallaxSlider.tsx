@@ -49,11 +49,11 @@ const PortfolioParallaxSlider = () => {
                                                 <div className="tp-showcase-slider-content z-index-2">
                                                     <h6 className="tp-showcase-slider-subtitle">{slide.subtitle}</h6>
                                                     <h1 className="tp-showcase-slider-title">
-                                                        <Link href="/portfolio-details-gallery-light">
+                                                        <Link href="#">
                                                             <span>{slide.title}</span>
                                                         </Link>
                                                     </h1>
-                                                    <Link href="/portfolio-details-gallery-light" className="tp-btn-black btn-green-light-bg">
+                                                    <Link href="#" className="tp-btn-black btn-green-light-bg">
                                                         <span className="tp-btn-black-filter-blur">
                                                             <ButtonBlurFilter filterId={slide.filterId} />
                                                         </span>

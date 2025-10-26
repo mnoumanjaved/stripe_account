@@ -14,6 +14,8 @@ import InnerPageHeader from '@/layouts/headers/InnerPageHeader';
 import { fadeAnimation } from '@/hooks/useGsapAnimation';
 import useScrollSmooth from '@/hooks/useScrollSmooth';
 import { useGSAP } from '@gsap/react';
+import { useBlogPosts } from '@/hooks/useBlogPosts';
+import { useState } from 'react';
 
 const BlogStandardMain = () => {
     // Initialize custom cursor and optional background styles
@@ -21,6 +23,27 @@ const BlogStandardMain = () => {
 
     // Enable smooth scroll animations
     useScrollSmooth();
+
+    // Fetch blog posts from Supabase
+    const [currentPage, setCurrentPage] = useState(0);
+    const postsPerPage = 5;
+    const { posts: supabasePosts, loading, error, total } = useBlogPosts({
+        limit: postsPerPage,
+        offset: currentPage * postsPerPage
+    });
+
+    // Calculate total pages
+    const totalPages = Math.ceil(total / postsPerPage);
+
+    // Handle page change
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+        // Scroll to top of blog section
+        const element = document.getElementById('postbox');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
 
     useGSAP(() => {
         const timer = setTimeout(() => {
@@ -49,16 +72,29 @@ const BlogStandardMain = () => {
                                 <div className="row">
                                     <div className="col-xxl-8 col-xl-8 col-lg-8">
                                         <div className="postbox-wrapper">
+                                            {loading ? (
+                                                <div className="text-center py-5">
+                                                    <p>Loading blog posts...</p>
+                                                </div>
+                                            ) : error ? (
+                                                <div className="text-center py-5">
+                                                    <p>Error loading posts. Showing static content.</p>
+                                                </div>
+                                            ) : null}
                                             {/* post box */}
-                                            <BlogStandardPost />
+                                            <BlogStandardPost posts={supabasePosts} />
                                             <div className="basic-pagination-wrap">
                                                 <div className="row">
                                                     <div className="col-xl-6">
                                                         {/* basic pagination */}
-                                                        <BasicPagination />
+                                                        <BasicPagination
+                                                            currentPage={currentPage}
+                                                            totalPages={totalPages}
+                                                            onPageChange={handlePageChange}
+                                                        />
                                                     </div>
                                                 </div>
-                                            </div> 
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="col-xxl-4 col-xl-4 col-lg-4">

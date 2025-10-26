@@ -36,9 +36,15 @@ const OffCanvasPanel: React.FC<IProps> = ({ openOffcanvas, setOpenOffcanvas }) =
                 <div className="tp-offcanvas-wrapper @@class offcanvas-white-bg">
                     <div className="tp-offcanvas-top d-flex align-items-center justify-content-between">
                         <div className="tp-offcanvas-logo">
-                            <Link href="/">
-                                <Image className="logo-1" width={120} src={logoBlack} alt="logo-black" />
-                                <Image className="logo-2" width={120} src={logoWhite} alt="logo-white" />
+                            <Link href="/" style={{ textDecoration: 'none' }}>
+                                <span style={{
+                                    fontSize: '24px',
+                                    fontWeight: '700',
+                                    color: '#ff0055',
+                                    letterSpacing: '-0.5px'
+                                }}>
+                                    Brainstorm.ai
+                                </span>
                             </Link>
                         </div>
                         <div className="tp-offcanvas-close">

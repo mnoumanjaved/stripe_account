@@ -32,11 +32,17 @@ class DatabaseService {
    * Save a complete blog post to database
    */
   async saveBlogPost(blogData: CompleteBlogData): Promise<string> {
-    return retryOperation(
-      async () => {
+    // Handle duplicate slugs by finding a unique one
+    let slug = blogData.slug;
+    let attemptNumber = 1;
+    const maxAttempts = 10;
+
+    while (attemptNumber <= maxAttempts) {
+      try {
         logger.debug('Saving blog post to database', {
           title: blogData.title,
-          slug: blogData.slug,
+          slug: slug,
+          attempt: attemptNumber,
         });
 
         const { data, error } = await this.supabase
@@ -44,7 +50,7 @@ class DatabaseService {
           .insert({
             title: blogData.title,
             content: blogData.content,
-            slug: blogData.slug,
+            slug: slug,
             metadescription: blogData.metadescription,
             primary_keyword: blogData.primaryKeyword,
             imagename: blogData.imagename,
@@ -56,14 +62,63 @@ class DatabaseService {
           .single();
 
         if (error) {
+          // Check if it's a duplicate slug error
+          if (error.code === '23505' && error.message.includes('blog_post_slug_key')) {
+            logger.warn('Slug already exists, trying with modified slug', {
+              originalSlug: slug,
+              attemptNumber,
+            });
+
+            // Append a number to make the slug unique
+            attemptNumber++;
+            slug = `${blogData.slug}-${attemptNumber}`;
+
+            if (attemptNumber > maxAttempts) {
+              throw new DatabaseError('saveBlogPost', new Error(`Unable to find unique slug after ${maxAttempts} attempts`));
+            }
+
+            // Try again with the new slug
+            continue;
+          }
+
+          // If it's a different error, throw it
           throw new DatabaseError('saveBlogPost', error);
         }
 
-        logger.success('Blog post saved successfully', { id: data.id });
+        logger.success('Blog post saved successfully', {
+          id: data.id,
+          slug: slug,
+          attemptNumber: attemptNumber
+        });
         return data.id;
-      },
-      'saveBlogPost'
-    );
+      } catch (error) {
+        // If it's not a duplicate slug error, re-throw
+        if (!(error instanceof DatabaseError)) {
+          throw error;
+        }
+
+        // Check if the error is about duplicate slugs
+        const errorMessage = (error as any).details?.originalError || '';
+        if (!errorMessage.includes('blog_post_slug_key')) {
+          throw error;
+        }
+
+        // Try with modified slug
+        logger.warn('Slug already exists, trying with modified slug', {
+          originalSlug: slug,
+          attemptNumber,
+        });
+
+        attemptNumber++;
+        slug = `${blogData.slug}-${attemptNumber}`;
+
+        if (attemptNumber > maxAttempts) {
+          throw new DatabaseError('saveBlogPost', new Error(`Unable to find unique slug after ${maxAttempts} attempts`));
+        }
+      }
+    }
+
+    throw new DatabaseError('saveBlogPost', new Error('Unexpected error in slug generation loop'));
   }
 
   /**

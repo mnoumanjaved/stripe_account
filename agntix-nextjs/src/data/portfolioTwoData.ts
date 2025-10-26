@@ -331,22 +331,22 @@ export const portfolioSliderElegantData = [
     {
         img: port1,
         title: "Brand promotion",
-        href: "/portfolio-details-gallery-light",
+        href: "#",
     },
     {
         img: port2,
         title: "Commercial",
-        href: "/portfolio-details-gallery-light",
+        href: "#",
     },
     {
         img: port3,
         title: "Wedding",
-        href: "/portfolio-details-gallery-light",
+        href: "#",
     },
     {
         img: port4,
         title: "Portrait",
-        href: "/portfolio-details-gallery-light",
+        href: "#",
     },
 ];
 

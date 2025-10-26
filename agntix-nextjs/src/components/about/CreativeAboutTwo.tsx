@@ -48,7 +48,7 @@ const CreativeAboutTwo = () => {
                                     crafting your vision into a legacy that endures.
                                 </p>
                                 <div className="tp_fade_anim" data-fade-from="top" data-delay=".7" data-ease="bounce">
-                                    <a className="tp-btn-red-border about-us-2" href="/launch-brainstorm">Get in Touch</a>
+                                    <a className="tp-btn-red-border about-us-2" href="/launch-brainstorm">Let's Start</a>
                                 </div>
                             </div>
                         </div>
