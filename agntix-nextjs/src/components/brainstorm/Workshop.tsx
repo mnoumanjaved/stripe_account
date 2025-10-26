@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { ShortlistedTrigger } from '../types';
+import { ShortlistedTrigger } from '@/lib/brainstorm/types';
 import { ChevronLeftIcon, ChevronRightIcon, PlayIcon, PauseIcon, ExportIcon, RestartIcon, DocumentIcon, TrashIcon } from './icons';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -62,7 +62,7 @@ const Workshop: React.FC<{
   const [ideas, setIdeas] = useState('');
 
   const currentTrigger = shortlistedTriggers[currentIndex];
-  
+
   useEffect(() => {
     if (currentIndex >= shortlistedTriggers.length && shortlistedTriggers.length > 0) {
         setCurrentIndex(shortlistedTriggers.length - 1);
@@ -82,7 +82,7 @@ const Workshop: React.FC<{
         onUpdateIdeas(currentTrigger.id, ideas);
     }
   }, [currentTrigger, ideas, onUpdateIdeas]);
-  
+
   const navigate = (newDirection: number) => {
     if (currentTrigger) onUpdateIdeas(currentTrigger.id, ideas);
     setDirection(newDirection);
@@ -128,8 +128,8 @@ const Workshop: React.FC<{
   return (
     <div className="w-full h-full flex flex-col min-h-[80vh]">
         <div className="mb-6 flex justify-between items-center">
-             <button 
-                onClick={onBackToBoard} 
+             <button
+                onClick={onBackToBoard}
                 className="flex items-center space-x-2 text-slate-300 hover:text-white transition-colors py-2 px-4 rounded-md bg-slate-700/50 hover:bg-slate-700"
             >
                 <ChevronLeftIcon className="w-5 h-5"/>

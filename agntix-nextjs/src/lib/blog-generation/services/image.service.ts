@@ -3,6 +3,7 @@
 // ==============================================
 
 import OpenAI from 'openai';
+import { createClient } from '@supabase/supabase-js';
 import { BlogImage } from '../types';
 import {
   APIConnectionError,
@@ -15,10 +16,23 @@ import { logger } from '../utils/logger';
 class ImageService {
   private openai: OpenAI;
   private method: string;
+  private supabase: any;
+  private storageBucket: string;
 
   constructor() {
     this.method =
       process.env.IMAGE_GENERATION_METHOD || 'dalle';
+
+    // Initialize Supabase client for storage
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+
+    if (!supabaseUrl || !supabaseKey) {
+      throw new Error('Supabase credentials are required for image storage');
+    }
+
+    this.supabase = createClient(supabaseUrl, supabaseKey);
+    this.storageBucket = 'blog-images';
 
     if (this.method === 'dalle') {
       const apiKey = process.env.OPENAI_API_KEY;
@@ -26,6 +40,69 @@ class ImageService {
         throw new Error('OPENAI_API_KEY is required for DALL-E');
       }
       this.openai = new OpenAI({ apiKey });
+    }
+
+    logger.debug('Image service initialized with Supabase Storage', {
+      bucket: this.storageBucket,
+    });
+  }
+
+  /**
+   * Download image from URL and upload to Supabase Storage
+   */
+  private async downloadAndUploadImage(
+    imageUrl: string,
+    fileName: string
+  ): Promise<string> {
+    try {
+      logger.debug('Downloading image from URL', { url: imageUrl, fileName });
+
+      // Fetch the image
+      const response = await fetch(imageUrl);
+
+      if (!response.ok) {
+        throw new Error(`Failed to download image: HTTP ${response.status}`);
+      }
+
+      // Get the image as array buffer
+      const arrayBuffer = await response.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
+
+      logger.debug('Image downloaded, uploading to Supabase Storage', {
+        size: buffer.length,
+        fileName,
+      });
+
+      // Upload to Supabase Storage
+      const { data, error } = await this.supabase.storage
+        .from(this.storageBucket)
+        .upload(fileName, buffer, {
+          contentType: 'image/png',
+          cacheControl: '31536000', // Cache for 1 year
+          upsert: true, // Overwrite if exists
+        });
+
+      if (error) {
+        logger.error('Failed to upload image to Supabase', error);
+        throw new Error(`Supabase upload failed: ${error.message}`);
+      }
+
+      // Get public URL
+      const { data: publicUrlData } = this.supabase.storage
+        .from(this.storageBucket)
+        .getPublicUrl(fileName);
+
+      const publicUrl = publicUrlData.publicUrl;
+
+      logger.success('Image uploaded to Supabase Storage', {
+        fileName,
+        publicUrl,
+      });
+
+      return publicUrl;
+    } catch (error) {
+      logger.error('Error in downloadAndUploadImage', error);
+      throw error;
     }
   }
 
@@ -88,15 +165,19 @@ class ImageService {
             });
           }
 
-          const imageUrl = response.data[0].url!;
+          const temporaryUrl = response.data[0].url!;
           const imageName = `blog-${Date.now()}.png`;
 
-          logger.success('Image generated with DALL-E', { imageName });
+          logger.success('Image generated with DALL-E', { imageName, temporaryUrl });
+
+          // Download and upload the image to Supabase Storage
+          logger.debug('Uploading image to Supabase Storage');
+          const permanentUrl = await this.downloadAndUploadImage(temporaryUrl, imageName);
 
           return {
             name: imageName,
-            webViewLink: imageUrl,
-            thumbnailLink: imageUrl,
+            webViewLink: permanentUrl,
+            thumbnailLink: permanentUrl,
           };
         } catch (error: any) {
           if (error.status === 429) {
@@ -147,10 +228,15 @@ class ImageService {
             id: data.id,
           });
 
+          const imageName = `unsplash-${data.id}.jpg`;
+
+          // Download and upload the image to Supabase Storage
+          const permanentUrl = await this.downloadAndUploadImage(data.urls.regular, imageName);
+
           return {
-            name: `unsplash-${data.id}.jpg`,
-            webViewLink: data.urls.regular,
-            thumbnailLink: data.urls.thumb,
+            name: imageName,
+            webViewLink: permanentUrl,
+            thumbnailLink: permanentUrl,
           };
         } catch (error) {
           if (error instanceof Error && error.message.includes('fetch')) {
@@ -209,10 +295,15 @@ class ImageService {
             id: photo.id,
           });
 
+          const imageName = `pexels-${photo.id}.jpg`;
+
+          // Download and upload the image to Supabase Storage
+          const permanentUrl = await this.downloadAndUploadImage(photo.src.large, imageName);
+
           return {
-            name: `pexels-${photo.id}.jpg`,
-            webViewLink: photo.src.large,
-            thumbnailLink: photo.src.medium,
+            name: imageName,
+            webViewLink: permanentUrl,
+            thumbnailLink: permanentUrl,
           };
         } catch (error) {
           if (error instanceof Error && error.message.includes('fetch')) {

@@ -1,5 +1,5 @@
 import { GoogleGenAI, Type } from "@google/genai";
-import { Brief, AgencyType, Cluster, ApiResponse } from '../types';
+import { Brief, AgencyType, Cluster, ApiResponse } from './types';
 
 const getAgencyFramework = (agencyType: AgencyType): string => {
   switch (agencyType) {
@@ -20,7 +20,7 @@ const buildPrompt = (brief: Brief): string => {
   const agencyFramework = getAgencyFramework(brief.agencyType);
 
   return `
-    **Persona**: 
+    **Persona**:
     You are a world-class Creative Director and strategist with decades of experience leading brainstorms that result in award-winning, globally recognized work. Your specialty is shattering conventional thinking and provoking teams to explore uncomfortable but brilliant territories.
 
     **User Input**:
@@ -40,7 +40,7 @@ const buildPrompt = (brief: Brief): string => {
     - Inject Constraints: Include limitations to spark creativity (e.g., "...with a $0 budget," "...using only audio," "...in a single city block.").
     - Use Contradictions: Create juxtapositions and unexpected pairings to force new thinking (e.g., "Partner with our biggest competitor," "Market our luxury product in a discount store.").
     - Provocative Fragments: Include 1-2 incomplete sentences per cluster that the team must finish (e.g., "Our product is now the official sponsor of ________.", "What if our brand suddenly became illegal? We would ________.").
-    
+
     **What NOT to Generate**:
     - Do NOT create tactical execution ideas (e.g., "Partner with X to do Y")
     - Do NOT suggest specific campaigns, activations, or media buys
@@ -53,13 +53,13 @@ const buildPrompt = (brief: Brief): string => {
 };
 
 // Get API key from environment
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY as string });
+const ai = new GoogleGenAI({ apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY as string });
 
 export const generateTriggers = async (brief: Brief): Promise<Cluster[]> => {
-  if (!process.env.GEMINI_API_KEY) {
-    throw new Error("GEMINI_API_KEY environment variable not set.");
+  if (!process.env.NEXT_PUBLIC_GEMINI_API_KEY) {
+    throw new Error("NEXT_PUBLIC_GEMINI_API_KEY environment variable not set.");
   }
-  
+
   const prompt = buildPrompt(brief);
 
   try {
@@ -99,7 +99,7 @@ export const generateTriggers = async (brief: Brief): Promise<Cluster[]> => {
     });
 
     const text = response.text;
-    
+
     // Fallback parsing in case the model wraps the JSON in markdown or other text
     const jsonMatch = text.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {

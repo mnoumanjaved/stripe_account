@@ -1,9 +1,6 @@
 import { CrossIcon, CrossIconTwo, DribbleTwo, InstagramSvg, TwitterTwo } from "@/svg";
-import logoWhite from "../../../public/assets/img/logo/logo-white.png";
-import logoBlack from "../../../public/assets/img/logo/logo-black.png";
 import MobileMenus from "../../layouts/subComponents/MobileMenus";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 import Link from 'next/link';
 import React from 'react';
 
@@ -45,9 +42,15 @@ const MobileOffcanvas: React.FC<IProps> = (
                 <div className="tp-offcanvas-2-left left-box">
                     <div className="tp-offcanvas-2-left-wrap d-flex justify-content-between align-items-center">
                         <div className="tp-offcanvas-2-logo">
-                            <Link href="/">
-                                <Image className="logo-1" width={140} src={logoWhite} alt="logo-white" />
-                                <Image className="logo-2" width={140} src={logoBlack} alt="logo-black" />
+                            <Link href="/" style={{ textDecoration: 'none' }}>
+                                <span style={{
+                                    fontSize: '24px',
+                                    fontWeight: '700',
+                                    color: '#ff0055',
+                                    letterSpacing: '-0.5px'
+                                }}>
+                                    Brainstorm.ai
+                                </span>
                             </Link>
                         </div>
                         <div className="tp-offcanvas-2-close d-md-none text-end">
@@ -75,7 +78,7 @@ const MobileOffcanvas: React.FC<IProps> = (
                         </button>
                     </div>
                     <div className="tp-offcanvas-2-right-info-box mt-160">
-                        <h4 className="tp-offcanvas-2-right-info-title">Get In Touch</h4>
+                        <h4 className="tp-offcanvas-2-right-info-title">Let's Start</h4>
                         <div className="tp-offcanvas-2-right-info-item">
                             <label className="mb-10">Phone</label>
                             <Link className="tp-line-white" href="tel:42345678910">+4 (234) 567 8910</Link>

@@ -1,9 +1,7 @@
-import logoBlack from '../../../public/assets/img/logo/logo-black.png';
 import OffCanvasPanel from '@/components/offcanvas/OffCanvasPanel';
 import useStickyHeader from '@/hooks/useStickyHeader';
 import NavMenus from '../subComponents/NavMenus';
 import React, { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 const InnerPageHeader = ({ containerCls = " container-1750" }) => {
@@ -18,9 +16,15 @@ const InnerPageHeader = ({ containerCls = " container-1750" }) => {
                     <div className="row align-items-center">
                         <div className="col-xl-2 col-lg-6 col-6">
                             <div className="tp-header-logo">
-                                <Link href="/">
-                                    <Image priority width={120} className="logo-white" src={logoBlack} alt="logo black" />
-                                    <Image priority width={120} className="logo-black d-none" src={logoBlack} alt="logo black" />
+                                <Link href="/" style={{ textDecoration: 'none' }}>
+                                    <span style={{
+                                        fontSize: '24px',
+                                        fontWeight: '700',
+                                        color: '#ff0055',
+                                        letterSpacing: '-0.5px'
+                                    }}>
+                                        Brainstorm.ai
+                                    </span>
                                 </Link>
                             </div>
                         </div>

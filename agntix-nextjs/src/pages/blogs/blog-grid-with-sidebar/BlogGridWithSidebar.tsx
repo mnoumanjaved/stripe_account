@@ -16,6 +16,8 @@ import { fadeAnimation } from '@/hooks/useGsapAnimation';
 import useScrollSmooth from '@/hooks/useScrollSmooth';
 import { useGSAP } from '@gsap/react';
 import blogData from '@/data/blogData';
+import { useBlogPosts } from '@/hooks/useBlogPosts';
+import { useState } from 'react';
 
 const BlogGridWithSidebar = () => {
     // Initialize custom cursor and optional background styles
@@ -23,6 +25,30 @@ const BlogGridWithSidebar = () => {
 
     // Enable smooth scroll animations
     useScrollSmooth();
+
+    // Fetch blog posts from Supabase
+    const [currentPage, setCurrentPage] = useState(0);
+    const postsPerPage = 8;
+    const { posts: supabasePosts, loading, error, total } = useBlogPosts({
+        limit: postsPerPage,
+        offset: currentPage * postsPerPage
+    });
+
+    // Combine Supabase posts with static fallback data
+    const displayPosts = supabasePosts.length > 0 ? supabasePosts : blogData.slice(35, 43);
+
+    // Calculate total pages
+    const totalPages = Math.ceil(total / postsPerPage);
+
+    // Handle page change
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+        // Scroll to top of blog section
+        const element = document.getElementById('down');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
 
     useGSAP(() => {
         const timer = setTimeout(() => {
@@ -51,8 +77,17 @@ const BlogGridWithSidebar = () => {
                                 <div className="row">
                                     <div className="col-lg-8">
                                         <div className="row">
+                                            {loading ? (
+                                                <div className="col-12 text-center py-5">
+                                                    <p>Loading blog posts...</p>
+                                                </div>
+                                            ) : error ? (
+                                                <div className="col-12 text-center py-5">
+                                                    <p>Error loading posts. Showing static content.</p>
+                                                </div>
+                                            ) : null}
                                             {
-                                                blogData.slice(35, 43).map((blog) => (
+                                                displayPosts.map((blog) => (
                                                     <BlogGridTwoItem key={blog.id} blog={blog} colClass='col-md-6' titleFont='' />
                                                 ))
                                             }
@@ -88,7 +123,11 @@ const BlogGridWithSidebar = () => {
                                         <div className="basic-pagination-wrap pt-30">
                                             <div className="row">
                                                 <div className="col-xl-6">
-                                                    <BlogListPagination />
+                                                    <BlogListPagination
+                                                        currentPage={currentPage}
+                                                        totalPages={totalPages}
+                                                        onPageChange={handlePageChange}
+                                                    />
                                                 </div>
                                             </div>
                                         </div>

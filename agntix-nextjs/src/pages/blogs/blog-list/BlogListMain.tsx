@@ -23,13 +23,26 @@ const BlogListMain = () => {
     // Fetch blog posts from Supabase
     const [currentPage, setCurrentPage] = useState(0);
     const postsPerPage = 10;
-    const { posts: supabasePosts, loading, error } = useBlogPosts({
+    const { posts: supabasePosts, loading, error, total } = useBlogPosts({
         limit: postsPerPage,
         offset: currentPage * postsPerPage
     });
 
     // Combine Supabase posts with static fallback data
     const displayPosts = supabasePosts.length > 0 ? supabasePosts : blogData.slice(25, 29);
+
+    // Calculate total pages
+    const totalPages = Math.ceil(total / postsPerPage);
+
+    // Handle page change
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+        // Scroll to top of blog section
+        const element = document.getElementById('down');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
 
     useGSAP(() => {
         const timer = setTimeout(() => {
@@ -76,7 +89,11 @@ const BlogListMain = () => {
                                         <div className="basic-pagination-wrap">
                                             <div className="row">
                                                 <div className="col-xl-6">
-                                                    <BlogListPagination />
+                                                    <BlogListPagination
+                                                        currentPage={currentPage}
+                                                        totalPages={totalPages}
+                                                        onPageChange={handlePageChange}
+                                                    />
                                                 </div>
                                             </div>
                                         </div>

@@ -24,6 +24,15 @@ const CheckoutSuccessContent = () => {
       // Clear cart from localStorage
       if (typeof window !== 'undefined') {
         localStorage.removeItem('cart');
+
+        // Check if this was a brainstorming session purchase
+        const hasPendingBrainstorm = localStorage.getItem('brainstorm_pending');
+        if (hasPendingBrainstorm === 'true') {
+          // Redirect to brainstorm page after 2 seconds
+          setTimeout(() => {
+            window.location.href = '/brainstorm';
+          }, 2000);
+        }
       }
     }
   }, [sessionId]);
@@ -72,10 +81,17 @@ const CheckoutSuccessContent = () => {
                             </div>
                           )}
 
-                          <p className="mb-4">
-                            You will receive an email confirmation shortly with your order
-                            details.
-                          </p>
+                          {typeof window !== 'undefined' && localStorage.getItem('brainstorm_pending') === 'true' ? (
+                            <div className="alert alert-success mb-4">
+                              <strong>Redirecting to your brainstorming session...</strong>
+                              <p className="mb-0 mt-2">Please wait while we prepare your creative ideas!</p>
+                            </div>
+                          ) : (
+                            <p className="mb-4">
+                              You will receive an email confirmation shortly with your order
+                              details.
+                            </p>
+                          )}
 
                           <div className="d-flex gap-3 justify-content-center flex-wrap">
                             <Link href="/shop" className="tp-cart-checkout-btn">

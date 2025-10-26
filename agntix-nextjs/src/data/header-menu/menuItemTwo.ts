@@ -86,7 +86,7 @@ const menuItemsTwo: MenuItem[] = [
         subItems: [
             { title: "Contact Me", href: "/contact-me-light" },
             { title: "Contact Us", href: "/contact-us-light" },
-            { title: "Get In Touch", href: "/launch-brainstorm" },
+            { title: "Let's Start", href: "/brainstorm" },
         ],
     },
 ];

@@ -71,14 +71,14 @@ export const projectsData: projectsDT[] = [
         title: "Acme Studio",
         image: project1,
         categories: ["Product Design", "Branding", "Creative"],
-        link: "/portfolio-details-gallery-light",
+        link: "#",
     },
     {
         id: 2,
         title: "Digital Farming",
         image: project4,
         categories: ["Product Design", "Branding", "Creative"],
-        link: "/portfolio-details-gallery-light",
+        link: "#",
 
     },
     {
@@ -86,28 +86,28 @@ export const projectsData: projectsDT[] = [
         title: "Grace Clinic",
         image: project2,
         categories: ["Creative", "Branding", "Development"],
-        link: "/portfolio-details-gallery-light",
+        link: "#",
     },
     {
         id: 4,
         title: "Virtual Reality",
         image: project5,
         categories: ["Product Design", "Branding", "Creative"],
-        link: "/portfolio-details-gallery-light",
+        link: "#",
     },
     {
         id: 5,
         title: "Smart Cities",
         image: project3,
         categories: ["Product Design", "Branding", "Creative"],
-        link: "/portfolio-details-gallery-light",
+        link: "#",
     },
     {
         id: 6,
         title: "Cloud Computing",
         image: project6,
         categories: ["Product Design", "Branding", "Creative"],
-        link: "/portfolio-details-gallery-light",
+        link: "#",
     },
     //home three project data start
     {
@@ -229,7 +229,7 @@ export const projectsData: projectsDT[] = [
         title: 'Simple Logistics',
         services: 'Supply Chain Platform',
         image: project17,
-        link: '/portfolio-details-gallery-light',
+        link: '#',
     },
     {
         id: 21,
@@ -237,7 +237,7 @@ export const projectsData: projectsDT[] = [
         title: 'Made Logistics',
         services: 'Enterprise Solution',
         image: project18,
-        link: '/portfolio-details-gallery-light',
+        link: '#',
     },
     {
         id: 22,
@@ -245,7 +245,7 @@ export const projectsData: projectsDT[] = [
         title: 'UX Design System',
         services: 'Design Framework',
         image: project19,
-        link: '/portfolio-details-gallery-light',
+        link: '#',
     },
     {
         id: 23,
@@ -253,7 +253,7 @@ export const projectsData: projectsDT[] = [
         title: 'Mobile Banking App',
         services: 'Fintech Solution',
         image: project20,
-        link: '/portfolio-details-gallery-light',
+        link: '#',
     },
     //home Six light project data end
 
@@ -298,7 +298,7 @@ export const projectsData: projectsDT[] = [
         image: project25,
         subtitle: "Creative",
         title: "DT ASSOCIATION",
-        link: "/portfolio-details-gallery-light",
+        link: "#",
 
     },
     {
@@ -306,35 +306,35 @@ export const projectsData: projectsDT[] = [
         image: project26,
         subtitle: "Creative",
         title: "DT COLLABORATION",
-        link: "/portfolio-details-gallery-light",
+        link: "#",
     },
     {
         id: 30,
         image: project27,
         subtitle: "Creative",
         title: "DT NETWORK",
-        link: "/portfolio-details-gallery-light",
+        link: "#",
     },
     {
         id: 31,
         image: project28,
         subtitle: "Creative",
         title: "DT COALITION",
-        link: "/portfolio-details-gallery-light",
+        link: "#",
     },
     {
         id: 32,
         image: project29,
         subtitle: "Creative",
         title: "DT SYNDICATE",
-        link: "/portfolio-details-gallery-light",
+        link: "#",
     },
     {
         id: 33,
         image: project30,
         subtitle: "Creative",
         title: "DT CONGLOMERATE",
-        link: "/portfolio-details-gallery-light",
+        link: "#",
     },
     //home eight light project data end
     {
@@ -344,7 +344,7 @@ export const projectsData: projectsDT[] = [
         image: project31,
         title: 'A clean and minimal website design template.',
         categories: ['Website', 'Business'],
-        link: '/portfolio-details-gallery-light',
+        link: '#',
     },
     {
         id: 35,
@@ -353,7 +353,7 @@ export const projectsData: projectsDT[] = [
         image: project32,
         title: 'Sleek and Simple Website Template',
         categories: ['Website', 'Business'],
-        link: '/portfolio-details-gallery-light',
+        link: '#',
     },
     {
         id: 36,
@@ -362,7 +362,7 @@ export const projectsData: projectsDT[] = [
         image: project33,
         title: 'Minimalist Web Design Framework',
         categories: ['Website', 'Business'],
-        link: '/portfolio-details-gallery-light',
+        link: '#',
     },
     {
         id: 37,
@@ -371,7 +371,7 @@ export const projectsData: projectsDT[] = [
         image: project34,
         title: 'Modern Minimal Web Design Template',
         categories: ['Website', 'Business'],
-        link: '/portfolio-details-gallery-light',
+        link: '#',
     },
     // IT Solution IT Project data start
     {
@@ -379,42 +379,42 @@ export const projectsData: projectsDT[] = [
         title: "The Professional Theft",
         category: "Digital Art",
         image: project35,
-        link: "/portfolio-details-gallery-light",
+        link: "#",
     },
     {
         id: 39,
         title: "The Mastermind Heist",
         category: "Digital Art",
         image: project36,
-        link: "/portfolio-details-gallery-light",
+        link: "#",
     },
     {
         id: 40,
         title: "The Shadow Larcenist",
         category: "Digital Art",
         image: project37,
-        link: "/portfolio-details-gallery-light",
+        link: "#",
     },
     {
         id: 41,
         title: "The Elite Burglar",
         category: "Digital Art",
         image: project38,
-        link: "/portfolio-details-gallery-light",
+        link: "#",
     },
     {
         id: 42,
         title: "The Mastermind Heist",
         category: "Digital Art",
         image: project36,
-        link: "/portfolio-details-gallery-light",
+        link: "#",
     },
     {
         id: 43,
         title: "The Shadow Larcenist",
         category: "Digital Art",
         image: project37,
-        link: "/portfolio-details-gallery-light",
+        link: "#",
     },
     //Home-11 IT Solution IT Project data end
 

@@ -109,7 +109,7 @@ export default function PortfolioHover() {
                     }
                     rel={`tp-porfolio-10-bg-${item.id}`}
                   >
-                    <Link href="/portfolio-details-gallery-light">
+                    <Link href="#">
                       <div className="tp-porfolio-10-title-box d-flex align-items-end">
                         <h2 className="tp-porfolio-10-title">{item.title}</h2>
                         <span className="tp-porfolio-10-category">

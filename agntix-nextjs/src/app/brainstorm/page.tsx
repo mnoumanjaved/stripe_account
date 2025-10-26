@@ -1,18 +1,23 @@
 'use client'
 
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Brief, Stage, Trigger, ShortlistedTrigger } from '../types';
-import { INITIAL_BRIEF } from '../constants';
-import { generateTriggers } from '../lib/geminiService';
-import BriefForm from '../components/BriefForm';
-import EngineLoading from '../components/EngineLoading';
-import TriggerBoard from '../components/TriggerBoard';
-import Workshop from '../components/Workshop';
-import BriefViewer from '../components/BriefViewer';
-import { DocumentIcon } from '../components/icons';
+import { Brief, Stage, Trigger, ShortlistedTrigger } from '@/lib/brainstorm/types';
+import { INITIAL_BRIEF } from '@/lib/brainstorm/constants';
+import { generateTriggers } from '@/lib/brainstorm/geminiService';
+import BriefForm from '@/components/brainstorm/BriefForm';
+import EngineLoading from '@/components/brainstorm/EngineLoading';
+import TriggerBoard from '@/components/brainstorm/TriggerBoard';
+import Workshop from '@/components/brainstorm/Workshop';
+import BriefViewer from '@/components/brainstorm/BriefViewer';
+import { DocumentIcon } from '@/components/brainstorm/icons';
+import BrainstormHeader from '@/layouts/headers/BrainstormHeader';
+import CreativeAgencyFooter from '@/layouts/footers/CreativeAgencyFooter';
+import BackToTop from '@/components/shared/BackToTop/BackToTop';
 
-export default function Home() {
+function BrainstormContent() {
+  const searchParams = useSearchParams();
   const [stage, setStage] = useState<Stage>(Stage.BRIEF);
   const [brief, setBrief] = useState<Brief>(INITIAL_BRIEF);
   const [allTriggers, setAllTriggers] = useState<Trigger[]>([]);
@@ -49,6 +54,49 @@ export default function Home() {
       setIsLoading(false);
     }
   }, []);
+
+  // Check for pending brainstorm session after checkout
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const paymentStatus = searchParams.get('payment');
+      const sessionId = searchParams.get('session_id');
+
+      // Handle successful payment
+      if (paymentStatus === 'success' && sessionId) {
+        // Clear cart from localStorage
+        localStorage.removeItem('cart');
+
+        // Remove payment params from URL without page reload
+        const url = new URL(window.location.href);
+        url.searchParams.delete('payment');
+        url.searchParams.delete('session_id');
+        window.history.replaceState({}, '', url);
+      }
+
+      const pendingBrainstorm = localStorage.getItem('brainstorm_pending');
+      const savedBrief = localStorage.getItem('brainstorm_brief');
+
+      if (pendingBrainstorm === 'true' && savedBrief) {
+        try {
+          const parsedBrief = JSON.parse(savedBrief);
+          setBrief(parsedBrief);
+
+          // Clear the pending flag and auto-submit
+          localStorage.removeItem('brainstorm_pending');
+          localStorage.removeItem('brainstorm_brief');
+
+          // Auto-submit the brief
+          setTimeout(() => {
+            handleBriefSubmit(parsedBrief);
+          }, 500);
+        } catch (e) {
+          console.error('Failed to parse saved brief:', e);
+          localStorage.removeItem('brainstorm_pending');
+          localStorage.removeItem('brainstorm_brief');
+        }
+      }
+    }
+  }, [handleBriefSubmit, searchParams]);
 
   const handleSaveTrigger = useCallback((trigger: Trigger) => {
     setShortlistedTriggers(prev => [...prev, { ...trigger, ideas: '' }]);
@@ -145,32 +193,71 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen text-slate-200 flex flex-col items-center justify-center p-4 selection:bg-blue-500/30">
-      {stage !== Stage.BRIEF && (
-        <button
-          onClick={() => setIsBriefVisible(true)}
-          className="fixed top-4 right-4 z-50 bg-slate-700/80 backdrop-blur-sm p-3 rounded-full text-slate-300 hover:text-white hover:bg-slate-600 transition-colors"
-          aria-label="View Brief"
-        >
-          <DocumentIcon className="w-6 h-6" />
-        </button>
-      )}
-      <AnimatePresence>
-        {isBriefVisible && <BriefViewer brief={brief} onClose={() => setIsBriefVisible(false)} />}
-      </AnimatePresence>
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={stage}
-          variants={stageVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          transition={{ duration: 0.5 }}
-          className="w-full max-w-7xl mx-auto"
-        >
-          {renderStage()}
-        </motion.div>
-      </AnimatePresence>
-    </main>
+    <>
+      <div id="magic-cursor">
+        <div id="ball"></div>
+      </div>
+
+      <BackToTop />
+      <BrainstormHeader />
+
+      <div id="smooth-wrapper">
+        <div id="smooth-content">
+          <main className="brainstorm-app">
+            {stage !== Stage.BRIEF && (
+              <button
+                onClick={() => setIsBriefVisible(true)}
+                className="fixed top-4 right-4 z-50 bg-slate-700/80 backdrop-blur-sm p-3 rounded-full text-slate-300 hover:text-white hover:bg-slate-600 transition-colors"
+                aria-label="View Brief"
+                style={{ top: '100px' }}
+              >
+                <DocumentIcon className="w-6 h-6" />
+              </button>
+            )}
+            <AnimatePresence>
+              {isBriefVisible && <BriefViewer brief={brief} onClose={() => setIsBriefVisible(false)} />}
+            </AnimatePresence>
+
+            <section className="pt-150 pb-120">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={stage}
+                  variants={stageVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  transition={{ duration: 0.5 }}
+                  className="container"
+                >
+                  {renderStage()}
+                </motion.div>
+              </AnimatePresence>
+            </section>
+          </main>
+
+          <CreativeAgencyFooter />
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default function BrainstormPage() {
+  return (
+    <Suspense fallback={
+      <>
+        <BrainstormHeader />
+        <div className="container">
+          <section className="pt-150 pb-120">
+            <div className="text-center">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">Loading Brainstorming Session...</h2>
+            </div>
+          </section>
+        </div>
+        <CreativeAgencyFooter />
+      </>
+    }>
+      <BrainstormContent />
+    </Suspense>
   );
 }

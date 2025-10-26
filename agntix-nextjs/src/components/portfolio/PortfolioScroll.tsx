@@ -12,15 +12,15 @@ import img5 from "../../../public/assets/img/interactive-img/port-5.jpg";
 import img6 from "../../../public/assets/img/interactive-img/port-6.jpg";
 
 const portfolioItems = [
-  { id: "tp-port-1", img: img1, title: "Milo", link: "/portfolio-details-gallery-light" },
-  { id: "tp-port-2", img: img2, title: "FASTWIRE", link: "/portfolio-details-gallery-light" },
-  { id: "tp-port-3", img: img3, title: "MEDIABION", link: "/portfolio-details-gallery-light" },
-  { id: "tp-port-4", img: img4, title: "Spruce", link: "/portfolio-details-gallery-light" },
-  { id: "tp-port-5", img: img5, title: "PSDMockup", link: "/portfolio-details-gallery-light" },
-  { id: "tp-port-6", img: img6, title: "JQ Wine", link: "/portfolio-details-gallery-light" },
-  { id: "tp-port-7", img: img4, title: "Diseño", link: "/portfolio-details-gallery-light" },
-  { id: "tp-port-8", img: img5, title: "Photoshoot", link: "/portfolio-details-gallery-light" },
-  { id: "tp-port-9", img: img6, title: "Gráfico", link: "/portfolio-details-gallery-light" },
+  { id: "tp-port-1", img: img1, title: "Milo", link: "#" },
+  { id: "tp-port-2", img: img2, title: "FASTWIRE", link: "#" },
+  { id: "tp-port-3", img: img3, title: "MEDIABION", link: "#" },
+  { id: "tp-port-4", img: img4, title: "Spruce", link: "#" },
+  { id: "tp-port-5", img: img5, title: "PSDMockup", link: "#" },
+  { id: "tp-port-6", img: img6, title: "JQ Wine", link: "#" },
+  { id: "tp-port-7", img: img4, title: "Diseño", link: "#" },
+  { id: "tp-port-8", img: img5, title: "Photoshoot", link: "#" },
+  { id: "tp-port-9", img: img6, title: "Gráfico", link: "#" },
 ];
 
 const PortfolioScroll = () => {

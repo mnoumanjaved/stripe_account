@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Brief, AgencyType } from '../types';
+import { Brief, AgencyType } from '@/lib/brainstorm/types';
 import { XMarkIcon } from './icons';
 
 interface BriefViewerProps {

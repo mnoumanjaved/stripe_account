@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LOADING_MESSAGES } from '../constants';
+import { LOADING_MESSAGES } from '@/lib/brainstorm/constants';
 
 const EngineLoading: React.FC = () => {
   const [messageIndex, setMessageIndex] = useState(0);
@@ -29,9 +29,9 @@ const EngineLoading: React.FC = () => {
         className="w-24 h-24 md:w-32 md:h-32 mb-8"
       >
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <motion.path d="M50 0V15" stroke="url(#grad1)" strokeWidth="4" strokeLinecap="round" 
+            <motion.path d="M50 0V15" stroke="url(#grad1)" strokeWidth="4" strokeLinecap="round"
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0 }} />
-            <motion.path d="M50 85V100" stroke="url(#grad1)" strokeWidth="4" strokeLinecap="round" 
+            <motion.path d="M50 85V100" stroke="url(#grad1)" strokeWidth="4" strokeLinecap="round"
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} />
             <motion.path d="M100 50H85" stroke="url(#grad1)" strokeWidth="4" strokeLinecap="round"
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} />
