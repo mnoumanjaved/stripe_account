@@ -207,11 +207,11 @@ function BrainstormContent() {
             {stage !== Stage.BRIEF && (
               <button
                 onClick={() => setIsBriefVisible(true)}
-                className="fixed top-4 right-4 z-50 bg-slate-700/80 backdrop-blur-sm p-3 rounded-full text-slate-300 hover:text-white hover:bg-slate-600 transition-colors"
+                className="fixed right-4 z-50 bg-slate-700/80 backdrop-blur-sm p-3 rounded-full text-slate-300 hover:text-white hover:bg-slate-600 transition-colors shadow-lg"
                 aria-label="View Brief"
                 style={{ top: '100px' }}
               >
-                <DocumentIcon className="w-6 h-6" />
+                <DocumentIcon className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
             )}
             <AnimatePresence>
@@ -246,15 +246,28 @@ export default function BrainstormPage() {
   return (
     <Suspense fallback={
       <>
-        <BrainstormHeader />
-        <div className="container">
-          <section className="pt-150 pb-120">
-            <div className="text-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">Loading Brainstorming Session...</h2>
-            </div>
-          </section>
+        <div id="magic-cursor">
+          <div id="ball"></div>
         </div>
-        <CreativeAgencyFooter />
+
+        <BackToTop />
+        <BrainstormHeader />
+
+        <div id="smooth-wrapper">
+          <div id="smooth-content">
+            <main className="brainstorm-app">
+              <section className="pt-150 pb-120">
+                <div className="container">
+                  <div className="text-center">
+                    <h2 className="text-2xl md:text-3xl font-bold mb-4">Loading Brainstorming Session...</h2>
+                  </div>
+                </div>
+              </section>
+            </main>
+
+            <CreativeAgencyFooter />
+          </div>
+        </div>
       </>
     }>
       <BrainstormContent />

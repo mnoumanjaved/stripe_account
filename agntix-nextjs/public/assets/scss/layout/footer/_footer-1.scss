@@ -106,10 +106,10 @@
             & a{
                 height: 42px;
                 width: 42px;
-                line-height: 39px;
-                text-align: center;
                 border-radius: 50%;
-                display: inline-block;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
                 color: var(--tp-common-black);
                 background-color: var(--tp-grey-2);
                 margin-bottom: 8px;

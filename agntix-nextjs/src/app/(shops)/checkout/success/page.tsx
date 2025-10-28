@@ -28,9 +28,9 @@ const CheckoutSuccessContent = () => {
         // Check if this was a brainstorming session purchase
         const hasPendingBrainstorm = localStorage.getItem('brainstorm_pending');
         if (hasPendingBrainstorm === 'true') {
-          // Redirect to brainstorm page after 2 seconds
+          // Redirect to brainstorm page after 2 seconds with payment success params
           setTimeout(() => {
-            window.location.href = '/brainstorm';
+            window.location.href = `/brainstorm?payment=success&session_id=${sessionId}`;
           }, 2000);
         }
       }

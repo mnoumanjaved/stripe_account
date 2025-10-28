@@ -23,7 +23,7 @@ const BriefViewer: React.FC<BriefViewerProps> = ({ brief, onClose }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+      className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 md:p-6"
       onClick={onClose}
     >
       <motion.div
@@ -31,17 +31,17 @@ const BriefViewer: React.FC<BriefViewerProps> = ({ brief, onClose }) => {
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 20 }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-        className="bg-slate-800/80 border border-slate-700 rounded-xl w-full max-w-2xl shadow-2xl relative"
+        className="bg-slate-800/80 border border-slate-700 rounded-xl w-full max-w-2xl shadow-2xl relative max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="p-8">
-            <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-slate-100">Project Brief</h2>
-                <button onClick={onClose} className="p-2 rounded-full text-slate-400 hover:bg-slate-700 hover:text-white transition-colors">
-                    <XMarkIcon className="w-6 h-6" />
+        <div className="p-4 sm:p-6 md:p-8">
+            <div className="flex justify-between items-center mb-4 md:mb-6">
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-100">Project Brief</h2>
+                <button onClick={onClose} className="p-2 rounded-full text-slate-400 hover:bg-slate-700 hover:text-white transition-colors flex-shrink-0 ml-2">
+                    <XMarkIcon className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
             </div>
-            <div className="space-y-6">
+            <div className="space-y-4 md:space-y-6">
                 <DetailItem label="Brand / Product" value={brief.brandProduct} />
                 <DetailItem label="Core Challenge" value={brief.coreChallenge} />
                 <DetailItem label="Target Audience" value={brief.targetAudience} />

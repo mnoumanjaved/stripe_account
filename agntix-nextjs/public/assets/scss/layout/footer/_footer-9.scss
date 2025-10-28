@@ -62,10 +62,10 @@
         & a{
             height: 42px;
             width: 42px;
-            line-height: 39px;
             border-radius: 50%;
-            text-align: center;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             color: var(--tp-common-cream-3);
             background-color: rgba(255, 255, 230, 0.1);
             &:not(:last-child){
