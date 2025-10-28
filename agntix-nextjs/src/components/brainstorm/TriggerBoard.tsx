@@ -30,24 +30,29 @@ const TriggerCard: React.FC<{
       drag="x"
       dragConstraints={{ left: 0, right: 0 }}
       onDragEnd={handleDragEnd}
-      initial={{ scale: 0.9, y: 20, opacity: 0 }}
+      initial={{ scale: 0.95, y: 20, opacity: 0 }}
       animate={{ scale: 1, y: 0, opacity: 1 }}
-      exit={{ scale: 0.8, x: 200, opacity: 0, transition: { duration: 0.3 } }}
+      exit={{ scale: 0.9, x: 200, opacity: 0, transition: { duration: 0.3 } }}
       whileTap={{ scale: 0.98 }}
-      className="absolute w-full h-full p-6 bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl cursor-grab flex flex-col justify-between"
+      className="absolute w-full h-full p-8 md:p-10 rounded-3xl cursor-grab flex flex-col justify-between"
+      style={{
+        backgroundColor: '#ffffff',
+        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+        border: '1px solid #e5e7eb'
+      }}
     >
       <div>
-        <div className="flex justify-between items-start mb-4">
-            <span className="text-sm font-semibold bg-blue-500/20 text-blue-300 py-1 px-3 rounded-full">{trigger.clusterTitle}</span>
+        <div className="flex justify-between items-start mb-6">
+            <span className="text-sm font-semibold bg-blue-500/20 text-blue-300 py-2 px-4 rounded-full">{trigger.clusterTitle}</span>
         </div>
-        <h2 className="text-2xl md:text-3xl font-bold text-slate-100">{trigger.prompt}</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-100 leading-tight">{trigger.prompt}</h2>
       </div>
-      <div className="flex justify-between items-center text-sm text-slate-500 mt-4">
-        <div className="flex items-center space-x-2">
+      <div className="flex justify-between items-center text-sm text-slate-400 mt-6 pt-6" style={{ borderTop: '1px solid #e5e7eb' }}>
+        <div className="flex items-center space-x-2 text-slate-500">
             <XMarkIcon className="w-5 h-5"/>
             <span>Dismiss</span>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 text-slate-500">
             <span>Save</span>
             <CheckIcon className="w-5 h-5"/>
         </div>
@@ -75,13 +80,13 @@ const TriggerBoard: React.FC<TriggerBoardProps> = ({ triggers, onSave, onDismiss
   const reversedTriggers = useMemo(() => [...triggers], [triggers]);
 
   return (
-    <div className="w-full flex flex-col items-center">
-      <header className="text-center mb-8 max-w-2xl">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-100">The Board</h1>
-        <p className="text-slate-400 mt-2">Curate your triggers. Swipe right to save, left to dismiss.</p>
+    <div className="w-full flex flex-col items-center px-4">
+      <header className="text-center mb-12 max-w-2xl">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-slate-100 mb-3">The Board</h1>
+        <p className="text-slate-400 text-base md:text-lg">Curate your triggers. Swipe right to save, left to dismiss.</p>
       </header>
 
-      <div className="relative w-full max-w-lg h-80 mb-8">
+      <div className="relative w-full max-w-2xl h-96 md:h-[450px] mb-12">
         {reversedTriggers.length > 0 ? (
           reversedTriggers.map((trigger) => (
             <TriggerCard
@@ -91,23 +96,36 @@ const TriggerBoard: React.FC<TriggerBoardProps> = ({ triggers, onSave, onDismiss
             />
           ))
         ) : (
-          <div className="w-full h-full flex flex-col items-center justify-center bg-slate-800 border-2 border-dashed border-slate-700 rounded-2xl">
-            <p className="text-xl font-semibold text-slate-400">All triggers curated!</p>
-            <p className="text-slate-500">Ready for the workshop?</p>
+          <div className="w-full h-full flex flex-col items-center justify-center rounded-3xl" style={{ backgroundColor: '#ffffff', border: '2px dashed #cbd5e1' }}>
+            <p className="text-2xl font-bold text-slate-400 mb-2">All triggers curated!</p>
+            <p className="text-slate-500 text-lg">Ready for the workshop?</p>
           </div>
         )}
       </div>
 
-      <div className="flex items-center space-x-4">
-        <button onClick={() => handleAction('dismiss')} disabled={triggers.length === 0} className="p-4 bg-slate-700/50 rounded-full text-red-400 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all transform hover:scale-110">
-            <XMarkIcon className="w-8 h-8"/>
+      <div className="flex items-center justify-center space-x-6">
+        <button
+          onClick={() => handleAction('dismiss')}
+          disabled={triggers.length === 0}
+          className="p-5 bg-slate-700/50 rounded-full text-red-400 hover:bg-slate-600 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-110 active:scale-95"
+          aria-label="Dismiss trigger"
+        >
+            <XMarkIcon className="w-7 h-7"/>
         </button>
-        <button onClick={onFinish} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg flex items-center space-x-2 transition-colors transform hover:scale-105">
-            <span>Start Workshop</span>
-            <ArrowRightIcon className="w-5 h-5"/>
+        <button
+          onClick={onFinish}
+          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-xl flex items-center space-x-3 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
+        >
+            <span className="text-lg">Start Workshop</span>
+            <ArrowRightIcon className="w-6 h-6"/>
         </button>
-        <button onClick={() => handleAction('save')} disabled={triggers.length === 0} className="p-4 bg-slate-700/50 rounded-full text-green-400 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all transform hover:scale-110">
-            <CheckIcon className="w-8 h-8"/>
+        <button
+          onClick={() => handleAction('save')}
+          disabled={triggers.length === 0}
+          className="p-5 bg-slate-700/50 rounded-full text-green-400 hover:bg-slate-600 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-110 active:scale-95"
+          aria-label="Save trigger"
+        >
+            <CheckIcon className="w-7 h-7"/>
         </button>
       </div>
     </div>
